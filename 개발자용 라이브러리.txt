@@ -1,0 +1,9 @@
+npm install -D @babel/cli@7.17.10 @babel/core@7.17.8 @babel/node@7.16.8 @babel/preset-env@7.16.11 nodemon
+
+
+
+npm init -> 패키지 구조 만듬
+라이브러리 설치 -> express, babel, nodemon
+babel.config.json -> 빌드 설정 -> import 문법 쓰기위해
+nodemon.json -> 개발도중 서버 끄고 키는것 자동화
+package json에 스크립트 명령어를 정해줌
