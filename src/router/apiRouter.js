@@ -1,0 +1,7 @@
+//api router.js
+
+import express from "express";
+
+const apiRouter = express.Router();
+
+export default apiRouter;

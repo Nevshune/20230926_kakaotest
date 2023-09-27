@@ -3,6 +3,8 @@
 // -> build ->
 // build -> common js
 import express from "express";
+import viewRouter from "./router/viewRouter";
+import apiRouter from "./router/apiRouter";
 
 const app = express();
 
@@ -16,37 +18,22 @@ app.set("view engine", "ejs");
 // console.log(process.cwd()); //절대경로 확인해보기
 app.set("views", process.cwd() + "/src/client/html");
 
-app.use((req, res, next) => {
-    console.log("지나갑니다");
-    next();
-});
+// 
+app.use("/css", express.static("src/client/css"));
+app.use("/js", express.static("src/client/js"));
+app.use("/file", express.static("src/client/file"));
 
-// controller
 
-app.get("/", (req, res, next) => {
-    // mvc
-    const homeData = {
-        data: [{ name: "철수" }, { name: "영희" }, { name: "민수" }],
-    };
-    res.render("home", homeData);
-    next();
-});
+// 주소: /**, view만 전달하는 router viewRouter -> ejs만
+// 주소: /api/** api만 전달하는 router apiRouter -> 데이터만
 
-app.use((req, res, next) => {
-    console.log("지나갑니다2");
-    next();
-});
+app.use("/",viewRouter);
 
-app.get("/introduce", (req, res) => {
-    const homeData = {
-        data: [{ name: "철수" }, { name: "영희" }, { name: "민수" }]}
-    res.render("introduce", homeData);
-});
+app.use("/",apiRouter);
 
-app.get("/common", (req, res) => {
-    res.render("common");
-});
 
 app.listen(8080, () => {
     console.info("8080 포트 서버 열림 😀 http://localhost:8080");
 });
+
+// module.exports = router
