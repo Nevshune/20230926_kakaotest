@@ -32,7 +32,7 @@ app.use("/file", express.static("src/client/file"));
 
 app.use("/",viewRouter);
 
-app.use("/",apiRouter);
+app.use("/api",apiRouter);
 
 
 app.listen(8080, () => {
