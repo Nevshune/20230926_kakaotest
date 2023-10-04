@@ -1,15 +1,59 @@
 <%- include('common/header.ejs') %>
 
-<div class="container basic-background">
-    <p class="main-title">
-        테스트
-    </p>
+<!-- 스플래쉬 -->
+<div class="splash z-[999] absolute top-0 flex h-screen w-screen" id="splash">
+    <div class="w-full h-full bg-[url('../file/splash_bg2.png')] bg-center bg-cover relative">
+        <div id="myDiv" class="w-full h-full absolute transition-all duration-[3s] ease-in-out bg-black 
+        flex flex-col justify-center items-center text-white ">
+            <div>스탬프</div>
+            <div>공방투어</div>
+            <div class="text-3xl font-black">해보작</div>
+        </div>
+    </div>
+    <!-- <img class="splash_logo" src="../file/splash_logo.png" alt=""> -->
+</div>
+<script src="../js/splash.js"></script>
+
+
+
+<div class="w-full relative flex flex-col pt-[80px]">
+    <div class=" w-full h-[300px] bg-orange-300 shadow-[0_5px_8px_0_rgba(0,0,0,0.2)]
+    flex justify-center items-center text-white text-3xl">
+            Carousell
+    </div>    
+</div>
+
+<div class="w-full flex flex-row justify-between px-4">
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex items-center justify-center">
+        추천
+    </div>
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex items-center justify-center">
+        도자기
+    </div>
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex items-center justify-center">
+        페인팅
+    </div>
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex flex-col items-center justify-center">
+        <div>쿠킹</div>
+        <div>베이킹</div>
+    </div>
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex flex-col items-center justify-center">
+        <div>라탄</div>
+        <div>목공예</div>
+    </div>
+    <div class="w-[50px] h-[50px] rounded-full bg-neutral-300 flex items-center justify-center">
+        기타
+    </div>
 </div>
 
 
 <%- include('common/footer.ejs') %>
 
-<script></script>
+<script>
+setTimeout(function() {
+    document.getElementById('myDiv').classList.remove('bg-black');
+}, 0);
+</script>
 
 </body>
 </html>

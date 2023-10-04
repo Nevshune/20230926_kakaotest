@@ -1,48 +1,61 @@
-<footer class="footer">
-    <ul>
-        <li>
-            <a href="/">
-                <i class="fas fa-home"></i>
-                <p>메인</p>
-            </a>
-        </li>
-        <li>
-            <a href="/introduce">
-                <i class="fas fa-book"></i>
-                <p>소개</p>
-            </a>
-        </li>
-        <li>
-            <a href="/course">
-                <i class="fas fa-road"></i>
-                <p>코스</p>
-            </a>
-        </li>
-        <li>
-            <a href="/qr">
-                <i class="fas fa-qrcode"></i>
-                <p>QR</p>
-            </a>
-        </li>
-        <li>
-            <a href="/profile">
-                <i class="fas fa-user-alt"></i>
-                <p>프로필</p>
-            </a>
-        </li>
-    </ul>
+<footer class="footer fixed bottom-0 w-full">
+    <div
+        class=" h-[60px] rounded-tl-[60px] rounded-tr-[60px] border-[3px] border-b-0 border-[#FFAA2C] flex relative items-center justify-around px-6"
+    >
+
+        <a   href="/" class="footerMenu w-10 flex justify-center text-2xl">
+            <i class="fas fa-home"></i>
+        </a>
+
+        <a   href="/course" class="footerMenu w-10 flex justify-center text-2xl">
+            <i class="fas fa-road"></i>
+        </a>
+
+        <a href="/qr" class="footerMenu w-10 flex justify-center text-2xl">
+            <div
+                class="absolute bg-[#FFAA2C] w-20 h-20 rounded-full -top-10 flex justify-center items-center"
+            >
+                <img src="../../file/footerQr.png" alt="" />
+            </div>
+        </a>
+
+        <a   href="/stamp" class="footerMenu w-10 flex justify-center text-2xl">
+            <i class="fas fa-stamp"></i>
+        </a>
+
+        <a   href="/profile" class="footerMenu w-10 flex justify-center text-2xl">
+            <i class="fas fa-user-alt"></i>
+        </a>
+
+    </div>
 </footer>
+
+<!-- 헤더 투명도 -->
+
+
+<!-- 푸터 버튼 색 -->
 <script>
     const addClickStyle = () => {
         const currentPath = window.location.pathname;
-        const links = document.querySelectorAll(".footer ul li a");
-        links.forEach((link)=>{
-            if (link.getAttribute("href")===currentPath){
-                link.parentElement.classList.add("on")
+        const links = document.querySelectorAll(".footerMenu");        
+        links.forEach((link) => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("text-red-600");
             }
-        })
-    }
+        });
+    };
+    document.addEventListener("DOMContentLoaded", addClickStyle);
+</script>
 
-    document.addEventListener("DOMContentLoaded", addClickStyle)
+<script>
+    const headerOpaOn = () => {
+        const currentPath2 = window.location.pathname;        
+        if ("/course" === currentPath2) {
+            link.classList.remove("bg-headerOpaOff");
+            link.classList.add("bg-headerOpaOn");
+        }
+    }
+    document.addEventListener("DOMContentLoaded", headerOpaOn);
     
 </script>
+
