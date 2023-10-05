@@ -30,7 +30,7 @@
 
 <div class="w-full h-[100px] border-b-[1px] border-gray-400">
    <ul
-      class="w-full h-full flex justify-between items-center px-4 font-[Pretendard-Regular] text-white"
+      class="w-full h-full flex justify-between items-center px-4 max-[345px]:px-0 font-[Pretendard-Regular] text-white"
       id="myTab"
       data-tabs-toggle="#myTabContent"
       role="tablist"
@@ -143,7 +143,7 @@
       <div class=" "><%- include('menuList/recommend.ejs') %></div>
    </div>
    <div class="hidden" id="ceramics" role="tabpanel" aria-labelledby="ceramics-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
+      <div class=" "><%- include('menuList/ceramics.ejs') %></div>
    </div>
    <div class="hidden" id="painting" role="tabpanel" aria-labelledby="painting-tab">
       <div class=" "><%- include('menuList/recommend.ejs') %></div>
