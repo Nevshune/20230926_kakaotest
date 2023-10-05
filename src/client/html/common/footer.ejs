@@ -49,10 +49,15 @@
 
 <script>
     const headerOpaOn = () => {
-        const currentPath2 = window.location.pathname;        
+        const currentPath2 = window.location.pathname;  
+        const link = document.querySelector("#headerOpa");     
         if ("/course" === currentPath2) {
             link.classList.remove("bg-headerOpaOff");
             link.classList.add("bg-headerOpaOn");
+        } else if ("/" === currentPath2) {
+            console.log(currentPath2)
+            link.classList.remove("h-[80px]");
+            link.classList.add("h-[60px]");
         }
     }
     document.addEventListener("DOMContentLoaded", headerOpaOn);
