@@ -6,7 +6,7 @@ let userLatitude;
 let userLongitude;
 
 let courseListInfo = [];
-let clickCourseId = 0;
+let clickShopId = 0;
 
 //지도 그리는 함수
 const drawMap = (latitude, lognitude) => {
@@ -42,13 +42,13 @@ const addUserMarker = () =>{
 
 //해당 위치로 지도를 이동한다
 const panTo = (latitude, longitude) => {
-    map.panTo(new kakao.maps.LatLng(35.86482240895294, 128.5933393643654));
+    map.panTo(new kakao.maps.LatLng(latitude, longitude));
 }
 
 //코스 마커 그리기
 const addCourseMarker = (data) =>  {
     let markerImage = "";
-    let markerSize = new kakao.maps.Size(35, 44);
+    let markerSize = new kakao.maps.Size(33, 44);
 
     if (data.category == '도자기') {
         markerImage = "/file/marker/dojaki_marker.png";
@@ -106,7 +106,58 @@ const configurationLocationWatch = () => {
     }
 }
 
+//클릭이벤트
+const clickShopList = (e, atelierId) => {
+    if (clickShopId !== atelierId) {
+        const shopsWrap = document.querySelectorAll(".course");
+        for (let i = 0; i < shopsWrap.length; i++) {
+            shopsWrap[i].classList.remove("on");
+        }
+        e.currentTarget.classList.add("on");
 
+        let shopLatitude;
+        let shopLongitude;
+
+        if (atelierId === 0) {
+            shopLatitude = userLatitude;
+            shopLongitude = userLongitude;
+        } else {
+        let matchedShop = courseListInfo.find(atelier_list => atelier_list.atelier_id === atelierId);
+        shopLatitude = matchedShop.latitude;
+        shopLongitude = matchedShop.longitude;
+        }
+        panTo(shopLatitude, shopLongitude);
+        clickShopId = atelierId;
+    }
+}
+
+const clickCategoryList = (category) => {
+    let matchedCategory = courseListInfo.find(atelier_list => atelier_list.category === category);
+    const shopsWrap = document.getElementById("category_shops");
+    let html = "";
+
+    for(let i = 0; i < matchedCategory.length; i++){
+        html += `<li class="course" onclick="clickShopList(event, ${matchedCategory[i].atelier_id})">`
+        html += `<p>${matchedCategory[i].title}</p>`
+        html += `</li>`
+    }
+    shopsWrap.innerHTML = html;
+    console.log(shopsWrap)
+}
+
+//카테고리별 공방리스트 뿌리기
+// const makeShopsHtml = () => {
+//     const shopsWrap = document.getElementById("category_shops");
+//     let html = "";
+
+//     for(let i = 0; i < courseListInfo.length; i++){
+//         html += `<li class="course" onclick="clickShopList(event, ${courseListInfo[i].atelier_id})">`
+//         html += `<p>${courseListInfo[i].title}</p>`
+//         html += `</li>`
+//     }
+//     shopsWrap.innerHTML = html;
+//     console.log(shopsWrap)
+// }
 
 //백엔드 서버로 코스정보 요청
 const getCourseListFetch = async () => {
@@ -116,7 +167,8 @@ const getCourseListFetch = async () => {
       const result = await response.json();
       courseListInfo = result;
       configurationLocationWatch();
-      clickCategory();
+    //   makeShopsHtml();
+      clickCategoryList();
     } else {
       console.log("getCourseList api 연동 에러")
     }

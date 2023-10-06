@@ -2,14 +2,14 @@
 
     <div class="container empty-background">
         <div  class="w-[100vw] min-h-[calc(100vh - 250px)] mt-[80px]">
-            <div id="location-map" class="w-full h-[350px] m-0"></div>
+            <div id="location-map" class="w-full h-[450px] m-0"></div>
             <ul id="category" class="w-full flex justify-around">
-                <li onclick="clickCategory('추천')">추천</li>
-                <li onclick="clickCategory('도자기')">도자기</li>
-                <li>페인팅</li>
-                <li>쿠킹/베이킹</li>
-                <li>라탄/목공예</li>
-                <li>...</li>
+                <li class="category" onclick=clickCategoryList(추천)>추천</li>
+                <li class="category" onclick=clickCategoryList(도자기)>도자기</li>
+                <li class="category" onclick=clickCategoryList(페인팅)>페인팅</li>
+                <li class="category" onclick=clickCategoryList(쿠킹베이킹)>쿠킹/베이킹</li>
+                <li class="category" onclick=clickCategoryList(라탄목공예)>라탄/목공예</li>
+                <li class="category" onclick=clickCategoryList(기타)>...</li>
             </ul>
             <ul id="category_shops" class="w-full flex justify-around"></ul>
         </div>
