@@ -1,23 +1,38 @@
 <%- include('common/header.ejs') %>
 
-    <div class="container empty-background">
-        <div  class="w-[100vw] min-h-[calc(100vh - 250px)] mt-[80px]">
-            <div id="location-map" class="w-full h-[450px] m-0"></div>
-            <ul id="category" class="w-full flex justify-around">
-                <li class="category" onclick=clickCategoryList(추천)>추천</li>
-                <li class="category" onclick=clickCategoryList(도자기)>도자기</li>
-                <li class="category" onclick=clickCategoryList(페인팅)>페인팅</li>
-                <li class="category" onclick=clickCategoryList(쿠킹베이킹)>쿠킹/베이킹</li>
-                <li class="category" onclick=clickCategoryList(라탄목공예)>라탄/목공예</li>
-                <li class="category" onclick=clickCategoryList(기타)>...</li>
-            </ul>
-            <ul id="category_shops" class="w-full flex justify-around"></ul>
-        </div>
+<div class="container empty-background">
+  <div class="w-[100vw] min-h-[calc(100vh - 250px)] mt-[80px]">
+    <div id="location-map" class="w-full h-[450px] m-0"></div>
+    <div id="category" class="w-full flex justify-around">
+      <form>
+        <input type="radio" name="category" id="추천" checked /><label for="추천">추천</label> <input type="radio" name="category" id="도자기" /><label
+          for="도자기"
+          >도자기</label
+        >
+        <input type="radio" name="category" id="페인팅" /><label for="페인팅">페인팅</label> <input type="radio" name="category" id="쿠킹베이킹" /><label
+          for="쿠킹베이킹"
+          >쿠킹/베이킹</label
+        >
+        <input type="radio" name="category" id="목공예라탄" /><label for="목공예라탄">목공예/라탄</label> <input type="radio" name="category" id="기타" /><label
+          for="기타"
+          >...</label
+        >
+      </form>
     </div>
+    <ul id="category_shops" class="w-full flex justify-around"></ul>
+  </div>
+</div>
 
-    
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=49b0739806538a18ff82230b4b557613"></script>
-    <script src="../js/course.js"></script>
-    
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=49b0739806538a18ff82230b4b557613"></script>
+<script src="../js/course.js"></script>
 
+<script>
+  // 라디오 버튼 클릭 이벤트 처리
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  radioButtons.forEach(function (radioButton) {
+    radioButton.addEventListener("click", function () {
+      selectedCategory(); // 라디오 버튼이 클릭되면 함수 호출
+    });
+  });
+</script>
 <%- include('common/footer.ejs') %>
