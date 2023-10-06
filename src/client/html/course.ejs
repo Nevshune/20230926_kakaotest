@@ -1,23 +1,23 @@
 <%- include('common/header.ejs') %>
 
-<div class="container empty-background"> 
-    <nav class="nav">
-        <p class="title">테스트 여행</p>
-        <div class="sub-title">코스 리스트</div>
-    </nav>
-    
-    <div class="content-container">
-        <ul id="course-wrap" class="course-nav-ul">
-            
-        </ul>
-        <div id="location-map"></div>
+    <div class="container empty-background">
+        <div  class="w-[100vw] min-h-[calc(100vh - 250px)] mt-[80px]">
+            <div id="location-map" class="w-full h-[350px] m-0"></div>
+            <ul id="category" class="w-full flex justify-around">
+                <li>추천</li>
+                <li>도자기</li>
+                <li>페인팅</li>
+                <li>쿠킹/베이킹</li>
+                <li>라탄/목공예</li>
+                <li>...</li>
+            </ul>
+            <ul id="category_shops" class="w-full flex justify-around"></ul>
+        </div>
     </div>
-</div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a68808a96fe44e04082ecfd234d63376"></script>
-<script src="/js/course.js"></script>
+
+    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=49b0739806538a18ff82230b4b557613"></script>
+    <script src="../js/course.js"></script>
+    
 
 <%- include('common/footer.ejs') %>
-
-
-</body>
-</html>
