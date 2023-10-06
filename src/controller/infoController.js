@@ -1,6 +1,6 @@
 import db from "../config/DB.config.js"
 
-export const getCourseList = async (req, res) => {
+export const getAteliersList = async (req, res) => {
 
     const userId = req.user ? req.user.user_id : null;
     
