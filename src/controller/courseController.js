@@ -10,5 +10,5 @@ export const getCourseList = async (req, res) => {
 
     const courseList =await db.execute(QUERY, [1]).then((result) => result[0]);
     res.json(courseList);
-    console.log(courseList);
+    // console.log(courseList);
 }
