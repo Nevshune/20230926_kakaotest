@@ -5,7 +5,7 @@ export const getCourseList = async (req, res) => {
     const userId = req.user ? req.user.user_id : null;
     
     const QUERY = `
-    SELECT * FROM 공방리스트
+    SELECT * FROM ateliers_list
     `
 
     const courseList =await db.execute(QUERY, [1]).then((result) => result[0]);

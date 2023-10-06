@@ -50,31 +50,30 @@ const addCourseMarker = (data) =>  {
     let markerImage = "";
     let markerSize = new kakao.maps.Size(35, 44);
 
-    if (data.분류 == '도자기') {
+    if (data.category == '도자기') {
         markerImage = "/file/marker/dojaki_marker.png";
     }
-    if (data.분류 == '페인팅') {
+    if (data.category == '페인팅') {
         markerImage = "/file/marker/painting_marker.png";
     }
-    if (data.분류 == '쿠킹베이킹') {
+    if (data.category == '쿠킹베이킹') {
         markerImage = "/file/marker/cooking_marker.png";
     }
-    if (data.분류 == '목공예라탄') {
+    if (data.category == '목공예라탄') {
         markerImage = "/file/marker/wood_marker.png";
     }
-    if (data.분류 == '기타') {
+    if (data.category == '기타') {
         markerImage = "/file/marker/etc_marker.png";
     }
     const image = new kakao.maps.MarkerImage(markerImage, markerSize);
 
-    const position = new kakao.maps.LatLng(data.위도, data.경도);
+    const position = new kakao.maps.LatLng(data.latitude, data.longitude);
     new kakao.maps.Marker({
         map : map,
         position : position,
-        title : data.상호,
+        title : data.title,
         image : image
     })
-    console.log(data.위도)
 }
 
 // 모든 코스를 돌면서 마커를 그리기 위한 함수
@@ -117,6 +116,7 @@ const getCourseListFetch = async () => {
       const result = await response.json();
       courseListInfo = result;
       configurationLocationWatch();
+      clickCategory();
     } else {
       console.log("getCourseList api 연동 에러")
     }
