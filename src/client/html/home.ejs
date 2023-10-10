@@ -2,17 +2,20 @@
 
 <!-- 스플래쉬 -->
 <div class="splash z-[999] absolute top-0 flex h-screen w-screen" id="splash">
-   <div class="w-full h-full bg-[url('../file/splash_bg2.png')] bg-center bg-cover relative">
-      <div
-         id="myDiv"
-         class="w-full h-full absolute transition-all duration-[3s] ease-in-out bg-black flex flex-col justify-center items-center text-white"
-      >
-         <div>스탬프</div>
-         <div>공방투어</div>
-         <div class="text-3xl font-black">해보작</div>
-      </div>
-   </div>
-   <!-- <img class="splash_logo" src="../file/splash_logo.png" alt=""> -->
+    <div
+        class="w-full h-full bg-[url('../file/splash_bg2.png')] bg-center bg-cover relative"
+    >
+        <div
+            id="myDiv"
+            class="w-full h-full absolute transition-all duration-[3s] ease-in-out bg-black flex flex-col justify-center items-center text-white"
+        >
+        <div class="w-24">
+            <img src="../file/Logo_Portrait.png" alt="splash_logo" />
+        </div>
+            <div class="text-[24px] ">동성로 공방 <span class="text-[#FDA92C] font-bold">스탬프</span> 투어</div>
+        </div>
+    </div>
+    <!-- <img class="splash_logo" src="../file/splash_logo.png" alt=""> -->
 </div>
 <script src="../js/splash.js"></script>
 
@@ -29,140 +32,175 @@
 <!-- 메뉴 및 리스트 -->
 
 <div class="w-full h-[100px] border-b-[1px] border-gray-400">
-   <ul
-      class="w-full h-full flex justify-between items-center px-4 max-[345px]:px-0 font-[Pretendard-Regular] text-white"
-      id="myTab"
-      data-tabs-toggle="#myTabContent"
-      role="tablist"
-   >
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2 aria-selected:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]"
-            id="recommend-tab"
-            data-tabs-target="#recommend"
-            type="button"
-            role="tab"
-            aria-controls="recommend"
-            aria-selected="false"
-         >
-            <div
-               class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_1.png')] bg-contain"
-            ></div>
-            <div class="z-20 text-white/90">추천</div>
-         </button>
-      </li>
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
-            id="ceramics-tab"
-            data-tabs-target="#ceramics"
-            type="button"
-            role="tab"
-            aria-controls="ceramics"
-            aria-selected="false"
-         >
-            <div
-               class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_2.png')] bg-contain"
-            ></div>
-            <div class="z-20 text-white/90">도자기</div>
-         </button>
-      </li>
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
-            id="painting-tab"
-            data-tabs-target="#painting"
-            type="button"
-            role="tab"
-            aria-controls="painting"
-            aria-selected="false"
-         >
-            <div
-               class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_3.png')] bg-contain"
-            ></div>
-            <div class="z-20 text-white/90">페인팅</div>
-         </button>
-      </li>
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
-            id="cooking-tab"
-            data-tabs-target="#cooking"
-            type="button"
-            role="tab"
-            aria-controls="cooking"
-            aria-selected="false"
-         >
-            <div
-               class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_4.png')] bg-contain"
-            ></div>
-            <div class="z-20 text-white/90 flex flex-col justify-center items-center">
-               <div>쿠킹</div>
-               <div>베이킹</div>
-            </div>
-         </button>
-      </li>
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
-            id="carpentry-tab"
-            data-tabs-target="#carpentry"
-            type="button"
-            role="tab"
-            aria-controls="carpentry"
-            aria-selected="false"
-         >
-            <div
-               class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_5.png')] bg-contain"
-            ></div>
-            <div class="z-20 text-white/90 flex flex-col justify-center items-center">
-               <div>라탄</div>
-               <div>목공예</div>
-            </div>
-         </button>
-      </li>
-      <li role=" presentation">
-         <button
-            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
-            id="other-tab"
-            data-tabs-target="#other"
-            type="button"
-            role="tab"
-            aria-controls="other"
-            aria-selected="false"
-         >
-            <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[#9984D3] bg-contain"></div>
-            <div class="z-20 text-white/90">기타</div>
-         </button>
-      </li>
-   </ul>
+    <ul
+        class="w-full h-full flex justify-between items-center px-4 max-[345px]:px-0 font-[Pretendard-Regular] text-white"
+        id="myTab"
+        data-tabs-toggle="#myTabContent"
+        role="tablist"
+    >
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2 aria-selected:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]"
+                id="recommend-tab"
+                data-tabs-target="#recommend"
+                type="button"
+                role="tab"
+                aria-controls="recommend"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_1.png')] bg-contain"
+                ></div>
+                <div class="z-20 text-white/90">추천</div>
+            </button>
+        </li>
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
+                id="ceramics-tab"
+                data-tabs-target="#ceramics"
+                type="button"
+                role="tab"
+                aria-controls="ceramics"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_2.png')] bg-contain"
+                ></div>
+                <div class="z-20 text-white/90">도자기</div>
+            </button>
+        </li>
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
+                id="painting-tab"
+                data-tabs-target="#painting"
+                type="button"
+                role="tab"
+                aria-controls="painting"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_3.png')] bg-contain"
+                ></div>
+                <div class="z-20 text-white/90">페인팅</div>
+            </button>
+        </li>
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
+                id="cooking-tab"
+                data-tabs-target="#cooking"
+                type="button"
+                role="tab"
+                aria-controls="cooking"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_4.png')] bg-contain"
+                ></div>
+                <div
+                    class="z-20 text-white/90 flex flex-col justify-center items-center"
+                >
+                    <div>쿠킹</div>
+                    <div>베이킹</div>
+                </div>
+            </button>
+        </li>
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
+                id="carpentry-tab"
+                data-tabs-target="#carpentry"
+                type="button"
+                role="tab"
+                aria-controls="carpentry"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_5.png')] bg-contain"
+                ></div>
+                <div
+                    class="z-20 text-white/90 flex flex-col justify-center items-center"
+                >
+                    <div>라탄</div>
+                    <div>목공예</div>
+                </div>
+            </button>
+        </li>
+        <li role=" presentation">
+            <button
+                class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-0 ring-blue-200 ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 aria-selected:text-white aria-selected:w-[60px] aria-selected:h-[60px] aria-selected:bg-black/5 aria-selected:ring-2"
+                id="other-tab"
+                data-tabs-target="#other"
+                type="button"
+                role="tab"
+                aria-controls="other"
+                aria-selected="false"
+            >
+                <div
+                    class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[#9984D3] bg-contain"
+                ></div>
+                <div class="z-20 text-white/90">기타</div>
+            </button>
+        </li>
+    </ul>
 </div>
 
-<div id="myTabContent">
-   <div class="hidden" id="recommend" role="tabpanel" aria-labelledby="recommend-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
-   </div>
-   <div class="hidden" id="ceramics" role="tabpanel" aria-labelledby="ceramics-tab">
-      <div class=" "><%- include('menuList/ceramics.ejs') %></div>
-   </div>
-   <div class="hidden" id="painting" role="tabpanel" aria-labelledby="painting-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
-   </div>
-   <div class="hidden" id="cooking" role="tabpanel" aria-labelledby="cooking-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
-   </div>
-   <div class="hidden" id="carpentry" role="tabpanel" aria-labelledby="carpentry-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
-   </div>
-   <div class="hidden" id="other" role="tabpanel" aria-labelledby="other-tab">
-      <div class=" "><%- include('menuList/recommend.ejs') %></div>
-   </div>
+<div id="myTabContent" class="mb-[100px]">
+    <div
+        class="hidden"
+        id="recommend"
+        role="tabpanel"
+        aria-labelledby="recommend-tab"
+    >
+        <div class=" "><%- include('menuList/recommend.ejs') %></div>
+    </div>
+    <div
+        class="hidden"
+        id="ceramics"
+        role="tabpanel"
+        aria-labelledby="ceramics-tab"
+    >
+        <div class=" "><%- include('menuList/ceramics.ejs') %></div>
+    </div>
+    <div
+        class="hidden"
+        id="painting"
+        role="tabpanel"
+        aria-labelledby="painting-tab"
+    >
+        <div class=" "><%- include('menuList/painting.ejs') %></div>
+    </div>
+    <div
+        class="hidden"
+        id="cooking"
+        role="tabpanel"
+        aria-labelledby="cooking-tab"
+    >
+        <div class=" "><%- include('menuList/cooking.ejs') %></div>
+    </div>
+    <div
+        class="hidden"
+        id="carpentry"
+        role="tabpanel"
+        aria-labelledby="carpentry-tab"
+    >
+        <div class=" "><%- include('menuList/carpentry.ejs') %></div>
+    </div>
+    <div class="hidden" id="other" role="tabpanel" aria-labelledby="other-tab">
+        <div class=" "><%- include('menuList/other.ejs') %></div>
+    </div>
 </div>
 
 <%- include('common/footer.ejs') %>
 
 <script>
-   setTimeout(function () {
-      document.getElementById('myDiv').classList.remove('bg-black');
-   }, 0);
+    setTimeout(function () {
+        document.getElementById('myDiv').classList.remove('bg-black');
+    }, 0);
 </script>
+
+<script src="../js/ateliersList.js"></script>
+
+<script></script>
