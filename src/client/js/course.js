@@ -8,6 +8,8 @@ let userLongitude;
 let courseListInfo = [];
 let clickShopId = 0;
 
+let overlays = [];
+
 //지도 그리는 함수
 const drawMap = (latitude, lognitude) => {
   const options = {
@@ -74,10 +76,6 @@ const addCourseMarker = (data) => {
     title: data.title,
     image: image,
   });
-
-  kakao.maps.event.addListener(marker, "click", function () {
-    openOverlay(matchedShop);
-  });
 };
 
 // 모든 코스를 돌면서 마커를 그리기 위한 함수
@@ -109,48 +107,39 @@ const configurationLocationWatch = () => {
   }
 };
 
-let customOverlay = null;
-
-// 오버레이를 닫는 함수
-function closeOverlay() {
-  if (customOverlay) {
-    customOverlay.setMap(null);
-  }
-}
-
-// 마커 클릭 시 오버레이를 열고 데이터를 표시하는 함수
-function openOverlay(matchedShop) {
-  closeOverlay(); // 이미 열린 오버레이가 있으면 닫습니다.
-
-  const iwContent = `
-        <div class="wrap">
-            <div class="info">
-                <div class="title">${matchedShop.title}
-                    <div class="close" onclick="closeOverlay()" title="닫기"></div>
+//커스텀 오버레이
+const overlay = (matchedShop) => {
+    let overlays = new kakao.maps.CustomOverlay({
+        map: map,
+        clickable: true,
+        content: `
+        <div class="overlay relative drop-shadow-lg">
+            <div class="w-[250px] h-full bg-white z-10">
+                <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
+                    <div class="text-lg">${matchedShop.title}</div>
+                    <div>X</div>
                 </div>
-                <div class="body">
-                    <div class="img">
-                        <img src="${matchedShop.img_src}" width="73" height="70">
+                <div class="w-full h-full flex justify-between items-center p-[6px] gap-4">
+                    <div class="w-[70px] h-[70px]">
+                        <img src="${matchedShop.img_src}" alt="공방 이미지"
+                            class="w-full h-full object-cover"
+                        >
                     </div>
-                    <div class="desc">
-                        <div class="address">${matchedShop.address}</div>
-                        <div class="hashtag">${matchedShop.hashtag}</div>
+                    <div class="w-[150px] h-full">
+                        <p class="w-full h-full text-xs mb-1 text-gray-500 whitespace-normal break-all">${matchedShop.address}</p>
+                        <p class="w-full h-full text-xs text-gray-600 whitespace-normal break-all">${matchedShop.hashtag}</p>
                     </div>
                 </div>
             </div>
-        </div>
-    `;
-
-  const iwPosition = new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude);
-
-  customOverlay = new kakao.maps.CustomOverlay({
-    map: map,
-    clickable: true,
-    content: iwContent,
-    position: iwPosition,
-    xAnchor: 0, // 컨텐츠의 x 위치
-    yAnchor: 1.5, // 컨텐츠의 y 위치
-  });
+            <div class="h-8 w-8 -z-10 bg-white transform translate-x-28 rotate-45 absolute -bottom-2"></div>
+            </div>
+        `,
+        position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
+        xAnchor: 0.5,
+        yAnchor: 1.5,
+        zIndex: 3
+    });
+    overlays.setMap(map);
 }
 
 //클릭이벤트
@@ -175,7 +164,15 @@ const clickShopList = (e, atelierId) => {
       shopLongitude = matchedShop.longitude;
     }
     panTo(shopLatitude, shopLongitude);
-    contentOverlay(matchedShop);
+    overlay(matchedShop);
+
+    let overlay_item = document.querySelectorAll('.overlay');
+      overlay_item.forEach(function (e) {
+        e.parentElement.previousSibling.style.display = "none";
+        e.parentElement.parentElement.style.border = "0px";
+        e.parentElement.parentElement.style.background = "unset";
+      });
+    
     clickShopId = atelierId;
   }
 };
@@ -208,7 +205,6 @@ const selectedCategory = () => {
         html += `</li>`;
       }
     }
-
     shopsWrap.innerHTML = html;
   } else {
     // console.log("라디오 버튼이 선택되지 않았습니다.");
