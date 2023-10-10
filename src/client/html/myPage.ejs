@@ -1,38 +1,23 @@
 <%- include('common/header.ejs') %>
+
 <div class="font-[Pretendard-Regular]">
     <!--아이디, 비밀번호 입력양식 -->
     <div
         class="flex justify-center items-center pt-[140px] text-[36px] text-[#FFAA2C] font-bold"
     >
-        회원가입
+        My Page
+    </div>
+
+    <div class="flex justify-center items-center mt-[36px]">
+        <img src="../file/cat.png" alt="rlqh" />
     </div>
 
     <div class="flex justify-center items-center mt-[65px] h-[40px]">
-        <div class="w-[25%] text-[16px] font-bold">아이디</div>
+        <div class="w-[25%] text-[16px] font-bold">이름</div>
         <input
             type="text"
             name="name"
             placeholder="아이디를 입력해주세요."
-            class="w-[70%] rounded-xl text-[14px]"
-        />
-    </div>
-
-    <div class="flex justify-center items-center mt-[24px] h-[40px]">
-        <div class="w-[25%] text-[16px] font-bold">비밀번호</div>
-        <input
-            type="password"
-            name="name"
-            placeholder="비밀번호를 입력해주세요."
-            class="flex justify-center w-[70%] rounded-xl text-[14px]"
-        />
-    </div>
-
-    <div class="flex justify-center items-center mt-[24px] h-[40px]">
-        <div class="w-[25%] text-[16px] font-bold">비밀번호 확인</div>
-        <input
-            type="password"
-            name="name"
-            placeholder="위 비밀번호와 동일하게 입력해주세요."
             class="w-[70%] rounded-xl text-[14px]"
         />
     </div>
@@ -46,6 +31,17 @@
             class="w-[70%] rounded-xl text-[14px]"
         />
     </div>
+
+    <div class="flex justify-center items-center mt-[65px] h-[40px]">
+        <div class="w-[25%] text-[16px] font-bold">연락처</div>
+        <input
+            type="number"
+            name="name"
+            placeholder="연락처를 입력해주세요."
+            class="w-[70%] rounded-xl text-[14px]"
+        />
+    </div>
+
     <!-- 개인정보처리방침 -->
     <div class="flex justify-center items-center mt-[20px]">
         <input
@@ -71,5 +67,4 @@
         </div>
     </div>
 </div>
-
 <%- include('common/footer.ejs') %>
