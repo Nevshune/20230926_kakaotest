@@ -1,14 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const splash = document.getElementById("splash");
+    const body = document.body;
     
     // 세션 스토리지에서 "splashShown" 키를 확인하여 스플래시 화면을 보여줄지 결정합니다.
     const splashShown = sessionStorage.getItem("splashShown");
     
     if (!splashShown) {
+        // 스크롤 막기
+        body.style.overflow = 'hidden';
+        
         // 스플래시 화면을 보여준 후 "splashShown" 키를 세션 스토리지에 저장합니다.
         setTimeout(function () {
             hideSplashScreen();
             sessionStorage.setItem("splashShown", "true");
+            
+            // 다시 원래대로 복구
+            body.style.overflow = '';
         }, 3000); // 3초 (3000 밀리초) 후에 숨김
     } else {
         // 이미 스플래시 화면을 본 경우에는 바로 숨깁니다.
