@@ -55,17 +55,13 @@
         if ("/course" === currentPath2) {
             link.classList.remove("bg-headerOpaOff");
             link.classList.add("bg-headerOpaOn");
-        } else if ("/" === currentPath2) {
-            console.log(currentPath2)
-            link.classList.remove("h-[80px]");
-            link.classList.add("h-[60px]");
-        }
+        } 
     }
     document.addEventListener("DOMContentLoaded", headerOpaOn);
     
 </script>
 
-<!-- 헤더 크기 및 투명도 -->
+<!-- 헤더 뒤로가기 -->
 <script>
     const headerBack = () => {
         const currentPath3 = window.location.pathname;  

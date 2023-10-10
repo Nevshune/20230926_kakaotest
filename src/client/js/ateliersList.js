@@ -39,7 +39,7 @@ const getCourseListFetch = async () => {
         </div>
             `;
                 container.innerHTML += html;
-            } ;            
+            } ;z                
         }
     }
 };
