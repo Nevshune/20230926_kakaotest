@@ -2,7 +2,7 @@ export const homeViewController = (req, res) => {
     res.render("home");
 };
 
-export const introduceViewController = (req, res) => {  
+export const introduceViewController = (req, res) => {
     res.render("introduce");
 };
 
@@ -32,4 +32,7 @@ export const joinViewController = (req, res) => {
 
 export const loginViewController = (req, res) => {
     res.render("login");
+};
+export const myPageController = (req, res) => {
+    res.render("myPage");
 };
