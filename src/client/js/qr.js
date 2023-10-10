@@ -1,3 +1,23 @@
+const msgAlert = (position, message, type) => {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: position,
+        showConfirmButton : false,
+        timer : 2000,
+    })
+    Toast.fire({ title: massage, icon : type })
+}
+
+const courseCheckFetch = async(qrCode) => {
+    console.log(qrCode)
+    // 로그인여부 체크 ->
+
+    // qrCode 올바른 데이터인지
+    if(!qrCode) {
+        magAlert("bottom","잘못된 QR코드 입니다.", "error")
+    }
+}
+
 let video = document.createElement('video');
 const canvasElement = document.getElementById('canvas');
 let canvas = canvasElement.getContext('2d');
