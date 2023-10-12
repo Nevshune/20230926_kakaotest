@@ -76,6 +76,18 @@ const addCourseMarker = (data) => {
     title: data.title,
     image: image,
   });
+
+  kakao.maps.event.addListener(marker, 'click', function() {
+    panTo(data.latitude, data.longitude);
+    overlay(data);
+
+    let overlay_item = document.querySelectorAll('.overlay');
+      overlay_item.forEach(function (e) {
+        e.parentElement.previousSibling.style.display = "none";
+        e.parentElement.parentElement.style.border = "0px";
+        e.parentElement.parentElement.style.background = "unset";
+      });
+})
 };
 
 // 모든 코스를 돌면서 마커를 그리기 위한 함수
@@ -117,7 +129,6 @@ const overlay = (matchedShop) => {
             <div class="w-[250px] h-full bg-white z-10">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
                     <div class="text-lg">${matchedShop.title}</div>
-                    <div>X</div>
                 </div>
                 <div class="w-full h-full flex justify-between items-center p-[6px] gap-4">
                     <div class="w-[70px] h-[70px]">
@@ -145,11 +156,6 @@ const overlay = (matchedShop) => {
 //클릭이벤트
 const clickShopList = (e, atelierId) => {
   if (clickShopId !== atelierId) {
-    const shopsWrap = document.querySelectorAll(".course");
-    for (let i = 0; i < shopsWrap.length; i++) {
-      shopsWrap[i].classList.remove("on");
-    }
-    e.currentTarget.classList.add("on");
 
     let shopLatitude;
     let shopLongitude;
@@ -177,7 +183,7 @@ const clickShopList = (e, atelierId) => {
   }
 };
 
-//카티고리 선택하기(라디오버튼) => 선택된 카테고리에 따라 공방목록 나오기
+//카테고리 선택하기(라디오버튼) => 선택된 카테고리에 따라 공방목록 나오기
 const selectedCategory = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]:checked');
 
@@ -190,19 +196,89 @@ const selectedCategory = () => {
 
     if (selectedId === "추천") {
       let recommendationCategory = courseListInfo.filter((atelier_list) => atelier_list.recommendation_status === 1);
-
+      
       for (let i = 0; i < recommendationCategory.length; i++) {
-        html += `<li class="course" onclick="clickShopList(event, ${recommendationCategory[i].atelier_id})">`;
-        html += `<p>${recommendationCategory[i].title}</p>`;
-        html += `</li>`;
+        //공방 카테고리별 색상설정
+        let ringColor = ""; // 초기화
+        switch (recommendationCategory[i].category) {
+          case "도자기":
+            ringColor = '#F54747';
+            break;
+          case "페인팅":
+            ringColor = '#4AC2CA';
+            break;
+          case "쿠킹베이킹":
+            ringColor = '#B5D35F';
+            break;
+          case "목공예라탄":
+            ringColor = '#D2963C';
+            break;
+          case "기타":
+            ringColor = '#9984D3';
+            break;
+          // default:
+            // 기본값 설정 (원하는 값이 없는 경우)
+            // ringColor = "red";
+            // break;
+        }
+
+        html += `
+          <li class="course" role="presentation" onclick="clickShopList(event, ${recommendationCategory[i].atelier_id})">
+            <button
+              id ="course" 
+              class="group rounded-full w-16 h-16 bg-black/30 ring-2 bg-center ring-[${ringColor}] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 "
+              type="button"
+              role="tab"
+              aria-selected="false"
+            >
+              <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url(${recommendationCategory[i].img_src})] bg-contain"></div>
+              <div class=" text-white/90">${recommendationCategory[i].title}</div>
+            </button>
+          </li>
+        `
       }
     } else {
       let Categories = courseListInfo.filter((atelier_list) => atelier_list.category === selectedId);
 
       for (let i = 0; i < Categories.length; i++) {
-        html += `<li class="course" onclick="clickShopList(event, ${Categories[i].atelier_id})">`;
-        html += `<p>${Categories[i].title}</p>`;
-        html += `</li>`;
+        //공방 카테고리별 색상설정
+        let ringColor = ""; // 초기화
+        switch (Categories[i].category) {
+          case "도자기":
+            ringColor = '#F54747';
+            break;
+          case "페인팅":
+            ringColor = '#4AC2CA';
+            break;
+          case "쿠킹베이킹":
+            ringColor = '#B5D35F';
+            break;
+          case "목공예라탄":
+            ringColor = '#D2963C';
+            break;
+          case "기타":
+            ringColor = '#9984D3';
+            break;
+          // default:
+            // 기본값 설정 (원하는 값이 없는 경우)
+            // ringColor = "red";
+            // break;
+        }
+
+        html += `
+          <li class="course" role="presentation" onclick="clickShopList(event, ${Categories[i].atelier_id})">
+          <button
+            id ="course" 
+            class="group rounded-full w-16 h-16 bg-black/30 ring-2 bg-center ring-[${ringColor}] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 "
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+              <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url(${Categories[i].img_src})] bg-contain"></div>
+              <div class=" text-white/90">${Categories[i].title}</div>
+            </button>
+          </li>
+        `
       }
     }
     shopsWrap.innerHTML = html;
