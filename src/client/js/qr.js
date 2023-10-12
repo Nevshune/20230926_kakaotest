@@ -38,7 +38,7 @@ const courseCheckFetch = async (qrCode) => {
         setTimeout(startScane, 3000);
         return;
     }
-    console.log(("성공"));
+    // console.log(("성공"));
 
     // 서버전송
     // qr코드, 현재 사용자 위치정보(lat,long)
@@ -62,7 +62,7 @@ const courseCheckFetch = async (qrCode) => {
     if (response.status === 201) {
         msgAlert("center", "방문 완료", "success");
         return setTimeout(() => {
-            window.location.href = "/course";
+            window.location.href = "/stamp";
         }, 2000);
     } else if (response.status === 401) {
         msgAlert("center", result.status, "error");

@@ -56,9 +56,9 @@ export const qrCheck = async (request, response) => {
 
     // 검증코드 3 (수학) : 반경 100m내에 있을때만 qr코드 찍을 수 있음 - 선택
     // dist m로 나옴
-    const dist = calculatorDistance(qrInfoData.latitude, qrInfoData.longitude, course.latitude, course.longitude)
+    // const dist = calculatorDistance(qrInfoData.latitude, qrInfoData.longitude, course.latitude, course.longitude)
 
-    if (dist > 100) return response.status(400).json({ status: "거리가 너무 멉니다." });
+    // if (dist > 100) return response.status(400).json({ status: "거리가 너무 멉니다." });
 
     // 방문완료 - 데이터베이스에 추가
     const QUERY4 = "INSERT INTO users_stamp (user_id, atelier_id, stamp_level) VALUES (?, ?, ?)";

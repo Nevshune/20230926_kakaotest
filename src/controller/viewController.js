@@ -37,7 +37,3 @@ export const loginViewController = (req, res) => {
 export const loginCallbackController = (req, res) => {
     res.render("loginCallback");
 };
-
-export const myPageController = (req, res) => {
-    res.render("myPage");
-};
