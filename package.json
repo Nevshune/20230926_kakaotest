@@ -1,15 +1,14 @@
 {
-  "name": "nevshune",
+  "name": "kakao-course-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "show kakao course",
   "main": "index.js",
   "scripts": {
     "start": "node build/app.js",
     "dev": "nodemon",
-    "build": "babel src -d build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d build"
   },
-  "author": "",
+  "author": "woosungkim",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "5.1.0",
@@ -18,14 +17,14 @@
     "express": "4.18.2",
     "jsonwebtoken": "9.0.2",
     "mysql2": "3.6.1",
-    "passport": "0.6.0",
-    "passport-kakao": "1.0.1"
+    "passport": "^0.6.0",
+    "passport-kakao": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.17.8",
-    "@babel/node": "^7.16.8",
-    "@babel/preset-env": "^7.16.11",
-    "nodemon": "^3.0.1"
+    "@babel/cli": "7.17.10",
+    "@babel/core": "7.17.8",
+    "@babel/node": "7.16.8",
+    "@babel/preset-env": "7.16.11",
+    "nodemon": "3.0.1"
   }
 }

@@ -1,8 +1,3 @@
-// common js
-// const express = require("espress")
-// -> build ->
-// build -> common js
-
 import "dotenv/config";
 import "regenerator-runtime"
 import express from "express";
@@ -17,10 +12,13 @@ const app = express();
 
 // ejs사용선언
 app.set("view engine", "ejs");
+
 // 경로 지정
 // console.log(process.cwd()); //절대경로 확인해보기
 app.set("views", process.cwd() + "/src/client/html");
 
+
+app.use(express.json());
 // 
 app.use("/css", express.static("src/client/css"));
 app.use("/js", express.static("src/client/js"));
