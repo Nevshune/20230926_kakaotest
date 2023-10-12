@@ -33,6 +33,11 @@ export const joinViewController = (req, res) => {
 export const loginViewController = (req, res) => {
     res.render("login");
 };
+
+export const loginCallbackController = (req, res) => {
+    res.render("loginCallback");
+};
+
 export const myPageController = (req, res) => {
     res.render("myPage");
 };
