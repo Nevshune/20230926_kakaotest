@@ -1,7 +1,7 @@
 const getCourseListFetch = async () => {
     const response = await fetch('/api/home');
     if (response.status === 200) {
-        console.log('getCourseList api 연동 성공');
+        // console.log('getCourseList api 연동 성공');
         const result = await response.json();
         courseListInfo = result;
         //   console.log(courseListInfo)
@@ -18,8 +18,8 @@ const getCourseListFetch = async () => {
             const course = courseListInfo[j];
 
             if ((container.id === "recommend" && course.recommendation_status === 1) ||
-            (container.id !== "recommend" && course.category === container.id)) {
-            const html = `
+                (container.id !== "recommend" && course.category === container.id)) {
+                const html = `
             <div class="w-full h-[180px] flex flex-row space-x-4 items-center border-b-[1px] border-neutral-200">
             <div class="w-[160px] h-[160px] rounded-md overflow-hidden">
                 <img src="${course.img_src}" />
@@ -39,7 +39,7 @@ const getCourseListFetch = async () => {
         </div>
             `;
                 container.innerHTML += html;
-            } ;            
+            };
         }
     }
 };
