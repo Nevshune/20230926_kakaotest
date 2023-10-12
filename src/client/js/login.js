@@ -55,8 +55,6 @@ const loginFetch = async () => {
   })
   const result = await response.json();
 
-  console.log(result);
-
   if (response.status === 200) {
     localStorage.setItem("accessToken", result.accessToken);
     msgAlert("center", "로그인 성공", "success");
