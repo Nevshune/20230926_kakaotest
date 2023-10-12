@@ -40,7 +40,7 @@
         const links = document.querySelectorAll(".footerMenu");        
         links.forEach((link) => {
             if (link.getAttribute("href") === currentPath) {
-                link.classList.add("text-red-600");
+                link.classList.add("text-[#FFAA2C]");
             }
         });
     };
@@ -48,6 +48,7 @@
 </script>
 
 <!-- 헤더 크기 및 투명도 -->
+<!-- 
 <script>
     const headerOpaOn = () => {
         const currentPath2 = window.location.pathname;  
@@ -57,11 +58,11 @@
             link.classList.add("bg-headerOpaOn");
         } 
     }
-    document.addEventListener("DOMContentLoaded", headerOpaOn);
-    
-</script>
+    document.addEventListener("DOMContentLoaded", headerOpaOn);    
+</script> -->
 
-<!-- 헤더 크기 및 투명도 -->
+<!-- 헤더 뒤로가기 버튼 -->
+
 <script>
     const headerBack = () => {
         const currentPath3 = window.location.pathname;  
@@ -70,8 +71,7 @@
             link.classList.add("hidden");
         }
     }
-    document.addEventListener("DOMContentLoaded", headerBack);
-    
+    document.addEventListener("DOMContentLoaded", headerBack);    
 </script>
 
 <!-- flowbite -->
