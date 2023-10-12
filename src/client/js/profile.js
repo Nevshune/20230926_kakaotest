@@ -1,10 +1,20 @@
+const msgAlert = (position, message, type) => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: position,
+    showConfirmButton: false,
+    timer: 2000,
+  })
+  Toast.fire({ title: message, icon: type })
+}
+
 const usersNav = document.getElementById("usersNav");
 
 const notLoginHtml = () => {
-  let html = "";
-  html += `<a href="/login"><button>로그인</button></a>`
-  console.log(html);
-  usersNav.innerHTML = html;
+  msgAlert("center", "로그인이 필요합니다.", "error");
+  return setTimeout(() => {
+    window.location.href = "/login";
+  }, 1200);
 }
 
 const logout = () => {
