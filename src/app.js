@@ -21,6 +21,9 @@ app.set("view engine", "ejs");
 // console.log(process.cwd()); //절대경로 확인해보기
 app.set("views", process.cwd() + "/src/client/html");
 
+//json 데이터 파싱 미들웨어
+app.use(express.json());
+
 // 
 app.use("/css", express.static("src/client/css"));
 app.use("/js", express.static("src/client/js"));
@@ -31,7 +34,6 @@ app.use("/file", express.static("src/client/file"));
 // 주소: /api/** api만 전달하는 router apiRouter -> 데이터만
 
 app.use("/",viewRouter);
-
 app.use("/api",apiRouter);
 
 
