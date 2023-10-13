@@ -7,6 +7,7 @@ import {
     howToDoController,
     introduceViewController,
     joinViewController,
+    loginCallbackController,
     loginViewController,
     myPageController,
     profileViewController,
@@ -27,6 +28,6 @@ viewRouter.get("/howToDo", howToDoController);
 viewRouter.get("/profile", profileViewController);
 viewRouter.get("/join", joinViewController);
 viewRouter.get("/login", loginViewController);
-viewRouter.get("/myPage", myPageController);
+viewRouter.get("/login/callback", loginCallbackController);
 
 export default viewRouter;

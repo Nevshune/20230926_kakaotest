@@ -1,50 +1,42 @@
 <%- include('common/header.ejs') %>
 
-<div class="font-[Pretendard-Regular]">
-    <!--아이디, 비밀번호 입력양식 -->
-    <div
-        class="flex justify-center items-center pt-[180px] text-[36px] text-[#FFAA2C] font-bold"
-    >
-        로그인
-    </div>
-
-    <div class="flex justify-center items-center mt-[65px] h-[40px]">
-        <div class="w-[20%] tex t-[16px] font-bold">아이디</div>
-        <input
-            type="text"
-            name="name"
-            placeholder="아이디를 입력해주세요."
-            class="w-[75%] rounded-xl text-[14px]"
-        />
-    </div>
-
-    <div class="flex justify-center items-center mt-[24px] h-[40px]">
-        <div class="w-[20%] text-[16px] font-bold">비밀번호</div>
-        <input
-            type="password"
-            name="name"
-            placeholder="비밀번호를 입력해주세요."
-            class="w-[75%] rounded-xl text-[14px]"
-        />
-    </div>
-    <!-- 로그인, 회원가입 버튼 -->
-    <div class="flex justify-center items-center mt-[34px]">
-        <div
-            class="flex justify-center items-center w-[144px] h-[41px] border-2 border-gray mr-[6px] font-bold text-[#929292] text-[20px] rounded"
-        >
-            회원가입
-        </div>
-        <div
-            class="flex justify-center items-center w-[144px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded"
-        >
+    <div class="font-[Pretendard-Regular]">
+        <!--아이디, 비밀번호 입력양식 -->
+        <div class="flex justify-center items-center pt-[180px] text-[36px] text-[#FFAA2C] font-bold">
             로그인
         </div>
+
+        <div class="flex justify-center items-center mt-[65px] h-[40px]">
+            <div class="w-[20%] tex t-[16px] font-bold">아이디</div>
+            <input type="text" name="name" placeholder="아이디를 입력해주세요." class="w-[75%] rounded-xl text-[14px]" id="userId"
+                required />
+        </div>
+
+        <div class="flex justify-center items-center mt-[24px] h-[40px]">
+            <div class="w-[20%] text-[16px] font-bold">비밀번호</div>
+            <input type="password" name="name" placeholder="비밀번호를 입력해주세요." class="w-[75%] rounded-xl text-[14px]"
+                id="userPassword" required />
+        </div>
+        <!-- 로그인, 회원가입 버튼 -->
+        <div class="flex justify-center items-center mt-[34px]">
+            <Button
+                class="flex justify-center items-center w-[144px] h-[41px] border-2 border-gray mr-[6px] font-bold text-[#929292] text-[20px] rounded"
+                id="join">
+                회원가입
+            </Button>
+            <Button
+                class="flex justify-center items-center w-[144px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded"
+                id="login" type="submit">
+                로그인
+            </Button>
+        </div>
+
+        <!-- 카카오 로그인 버튼 -->
+        <a class="flex justify-center items-center mt-[36px] kakao-login-button-wrap" href="/api/kakao">
+            <img src="../file/kakao.png" alt="카카오 로그인 버튼" />
+        </a>
     </div>
 
-    <!-- 카카오 로그인 버튼 -->
-    <div class="flex justify-center items-center mt-[36px]">
-        <img src="../file/kakao.png" alt="카카오 로그인 버튼" />
-    </div>
-</div>
+    <script src="../js/login.js"></script>
 
-<%- include('common/footer.ejs') %>
+    <%- include('common/footer.ejs') %>

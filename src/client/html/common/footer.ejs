@@ -1,29 +1,27 @@
 <footer class="footer fixed bottom-0 w-full">
     <div
-        class=" h-[60px] rounded-tl-[60px] bg-white/90 rounded-tr-[60px] border-[3px] border-b-0 border-[#FFAA2C] flex relative items-center justify-around px-6"
-    >
+        class=" h-[60px] rounded-tl-[60px] bg-white/90 rounded-tr-[60px] border-[3px] border-b-0 border-[#FFAA2C] flex relative items-center justify-around px-6">
 
-        <a   href="/" class="footerMenu w-10 flex justify-center text-2xl">
+        <a href="/" class="footerMenu w-10 flex justify-center text-2xl">
             <i class="fas fa-home"></i>
         </a>
 
-        <a   href="/course" class="footerMenu w-10 flex justify-center text-2xl">
+        <a href="/course" class="footerMenu w-10 flex justify-center text-2xl">
             <i class="fa-solid fa-map-location-dot"></i>
         </a>
 
         <a href="/qr" class="footerMenu w-10 flex justify-center text-2xl">
-            <div
-                class="absolute bg-[#FFAA2C] w-20 h-20 rounded-full -top-10 flex justify-center items-center"
-            >
+            <div class="absolute bg-[#FFAA2C] w-20 h-20 rounded-full -top-10 flex justify-center items-center">
                 <img src="../../file/footerQr.png" alt="" />
             </div>
         </a>
 
-        <a   href="/stamp" class="footerMenu w-10 flex justify-center text-2xl">
+        <a href="/stamp" class="footerMenu w-10 flex justify-center text-2xl">
             <i class="fas fa-stamp"></i>
         </a>
 
-        <a   href="/myPage" class="footerMenu w-10 flex justify-center text-2xl">
+
+        <a href="/profile" class="footerMenu w-10 flex justify-center text-2xl">
             <i class="fas fa-user-alt"></i>
         </a>
 
@@ -37,10 +35,10 @@
 <script>
     const addClickStyle = () => {
         const currentPath = window.location.pathname;
-        const links = document.querySelectorAll(".footerMenu");        
+        const links = document.querySelectorAll(".footerMenu");
         links.forEach((link) => {
             if (link.getAttribute("href") === currentPath) {
-                link.classList.add("text-red-600");
+                link.classList.add("text-[#FFAA2C]");
             }
         });
     };
@@ -48,6 +46,7 @@
 </script>
 
 <!-- 헤더 크기 및 투명도 -->
+<!-- 
 <script>
     const headerOpaOn = () => {
         const currentPath2 = window.location.pathname;  
@@ -57,21 +56,20 @@
             link.classList.add("bg-headerOpaOn");
         } 
     }
-    document.addEventListener("DOMContentLoaded", headerOpaOn);
-    
-</script>
+    document.addEventListener("DOMContentLoaded", headerOpaOn);    
+</script> -->
 
-<!-- 헤더 크기 및 투명도 -->
+<!-- 헤더 뒤로가기 버튼 -->
+
 <script>
     const headerBack = () => {
-        const currentPath3 = window.location.pathname;  
-        const link = document.querySelector("#back-button");     
+        const currentPath3 = window.location.pathname;
+        const link = document.querySelector("#back-button");
         if ("/" === currentPath3) {
             link.classList.add("hidden");
         }
     }
-    document.addEventListener("DOMContentLoaded", headerBack);
-    
+    document.addEventListener("DOMContentLoaded", headerBack);    
 </script>
 
 <!-- flowbite -->
