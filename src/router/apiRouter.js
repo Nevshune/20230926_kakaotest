@@ -2,7 +2,7 @@
 
 import express from "express";
 
-import { getCourseList, getStampList, qrCheck } from "../controller/courseController";
+import { getCourseList, getStampList, missionCompleteList, qrCheck } from "../controller/courseController";
 import { authMe, join, login } from "../controller/userController";
 import { handleKakaoLogin, isAuth } from "../middleware/auth";
 import passport from "passport";
@@ -15,7 +15,8 @@ const apiRouter = express.Router();
 apiRouter.get("/courses", getCourseList)
 apiRouter.post("/courses", isAuth, qrCheck);
 apiRouter.get("/home", getCourseList)
-apiRouter.post("/stamp", getStampList)
+apiRouter.post("/stamp", isAuth, getStampList)
+apiRouter.post("/stamp/mission", isAuth, missionCompleteList)
 
 // 회원가입
 apiRouter.post("/join", join);
