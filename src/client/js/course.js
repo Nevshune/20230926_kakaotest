@@ -36,7 +36,7 @@ const addUserMarker = () => {
 
   let marker = new kakao.maps.Marker({
     map: map,
-    position: new kakao.maps.LatLng(35.86482240895294, 128.5933393643654),
+    position: new kakao.maps.LatLng(userLatitude, userLongitude),
     image: image,
   });
   markers.push(marker);
@@ -46,6 +46,10 @@ const addUserMarker = () => {
 const panTo = (latitude, longitude) => {
   map.panTo(new kakao.maps.LatLng(latitude, longitude));
 };
+
+let clickMyPosition = () => {
+  panTo(userLatitude, userLongitude);
+}
 
 //코스 마커 그리기
 const addCourseMarker = (data) => {
@@ -77,17 +81,17 @@ const addCourseMarker = (data) => {
     image: image,
   });
 
-  kakao.maps.event.addListener(marker, 'click', function() {
+  kakao.maps.event.addListener(marker, 'click', function () {
     panTo(data.latitude, data.longitude);
     overlay(data);
 
     let overlay_item = document.querySelectorAll('.overlay');
-      overlay_item.forEach(function (e) {
-        e.parentElement.previousSibling.style.display = "none";
-        e.parentElement.parentElement.style.border = "0px";
-        e.parentElement.parentElement.style.background = "unset";
-      });
-})
+    overlay_item.forEach(function (e) {
+      e.parentElement.previousSibling.style.display = "none";
+      e.parentElement.parentElement.style.border = "0px";
+      e.parentElement.parentElement.style.background = "unset";
+    });
+  })
 };
 
 // 모든 코스를 돌면서 마커를 그리기 위한 함수
@@ -121,10 +125,10 @@ const configurationLocationWatch = () => {
 
 //커스텀 오버레이
 const overlay = (matchedShop) => {
-    let overlays = new kakao.maps.CustomOverlay({
-        map: map,
-        clickable: true,
-        content: `
+  let overlays = new kakao.maps.CustomOverlay({
+    map: map,
+    clickable: true,
+    content: `
         <div class="overlay relative drop-shadow-lg">
             <div class="w-[250px] h-full bg-white z-10">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
@@ -145,12 +149,12 @@ const overlay = (matchedShop) => {
             <div class="h-8 w-8 -z-10 bg-white transform translate-x-28 rotate-45 absolute -bottom-2"></div>
             </div>
         `,
-        position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
-        xAnchor: 0.5,
-        yAnchor: 1.5,
-        zIndex: 3
-    });
-    overlays.setMap(map);
+    position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
+    xAnchor: 0.5,
+    yAnchor: 1.5,
+    zIndex: 3
+  });
+  overlays.setMap(map);
 }
 
 //클릭이벤트
@@ -173,12 +177,12 @@ const clickShopList = (e, atelierId) => {
     overlay(matchedShop);
 
     let overlay_item = document.querySelectorAll('.overlay');
-      overlay_item.forEach(function (e) {
-        e.parentElement.previousSibling.style.display = "none";
-        e.parentElement.parentElement.style.border = "0px";
-        e.parentElement.parentElement.style.background = "unset";
-      });
-    
+    overlay_item.forEach(function (e) {
+      e.parentElement.previousSibling.style.display = "none";
+      e.parentElement.parentElement.style.border = "0px";
+      e.parentElement.parentElement.style.background = "unset";
+    });
+
     clickShopId = atelierId;
   }
 };
@@ -196,7 +200,7 @@ const selectedCategory = () => {
 
     if (selectedId === "추천") {
       let recommendationCategory = courseListInfo.filter((atelier_list) => atelier_list.recommendation_status === 1);
-      
+
       for (let i = 0; i < recommendationCategory.length; i++) {
         //공방 카테고리별 색상설정
         let ringColor = ""; // 초기화
@@ -217,9 +221,9 @@ const selectedCategory = () => {
             ringColor = '#9984D3';
             break;
           // default:
-            // 기본값 설정 (원하는 값이 없는 경우)
-            // ringColor = "red";
-            // break;
+          // 기본값 설정 (원하는 값이 없는 경우)
+          // ringColor = "red";
+          // break;
         }
 
         html += `
@@ -260,9 +264,9 @@ const selectedCategory = () => {
             ringColor = '#9984D3';
             break;
           // default:
-            // 기본값 설정 (원하는 값이 없는 경우)
-            // ringColor = "red";
-            // break;
+          // 기본값 설정 (원하는 값이 없는 경우)
+          // ringColor = "red";
+          // break;
         }
 
         html += `
