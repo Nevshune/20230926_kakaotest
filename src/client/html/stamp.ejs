@@ -1,5 +1,42 @@
 <%- include('common/header.ejs') %>
 
+<div class="w-full h-screen bg-gray-200 flex flex-col justify-center items-center space-y-12 ">
+
+    <div class="flex flex-col justify-center items-center space-y-4">
+        <img src="../file/stamp/titleLogo.png" alt="logo" class="h-[30px]">
+        <div class="text-[24px] font-bold">미션! 스탬프를 채워라!</div>
+        <div class="flex flex-col items-center justify-center">
+            <div>공방을 방문 및 체험하고 스탬프를 6개 채우면</div>
+            <div class="tracking-wide">15% 할인권 및 할로윈 캔들 응모권을 드려요</div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-[21px] flex-wrap">
+        <img src="../file/stamp/stamp_fill.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+        <img src="../file/stamp/stamp_fill.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+        <img src="../file/stamp/stamp_empty.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+        <img src="../file/stamp/stamp_empty.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+        <img src="../file/stamp/stamp_empty.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+        <img src="../file/stamp/stamp_empty.png" alt="stamp" 
+        class="w-[82px] h-[82px]">
+    </div>
+
+    <div>
+        <div class="flex justify-center items-center">
+            <Button
+                class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#c8c8c8] text-[#333333] text-[16px] rounded tracking-wide">
+                획득한 스탬프 2/6
+            </Button>
+        </div>
+    </div>
+
+
+
 <div class="w-full min-h-screen pt-[20px] bg-white flex flex-col justify-center items-center gap-4">
     <!-- 스탬프 찍히는 공간 -->
     <div id="stamp_box" class="w-96 h-full flex flex-wrap justify-around items-center gap-4" ></div>
