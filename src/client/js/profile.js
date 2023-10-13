@@ -27,17 +27,17 @@ const loginHtml = (data) => {
 
   let html = "";
   html += `
-  <div class="flex justify-center items-center text-[36px] text-[#FFAA2C] font-bold">
+  <div class="flex justify-center items-center text-[24px] text-[#FFAA2C] font-bold">
     My Page
   </div>
   <div class="flex justify-center items-center mt-[7px]">
-    <div class="w-[90px] h-[90px] rounded-full overflow-hidden">`;
+    <div class="w-[80px] h-[80px] rounded-full overflow-hidden">`;
 
   // 프로필 이미지가 있는 경우를 분리
   if (data.user_image) {
-    html += `<img src="${data.user_image}" alt="유저 이미지" class=" bg-cover h-[90px] w-[90px]" />`
+    html += `<img src="${data.user_image}" alt="유저 이미지" class=" bg-cover h-[80px] w-[80px]" />`
   } else {
-    html += `<img src="../file/cat.png" alt="유저 이미지" class="bg-cover h-[90px] w-[90px]" />`
+    html += `<img src="../file/cat.png" alt="유저 이미지" class="bg-cover h-[80px] w-[80px]" />`
   }
 
   html +=
@@ -45,7 +45,7 @@ const loginHtml = (data) => {
     </div>
   </div>
   
-  <div class="flex items-center mt-[30px] h-[40px] ml-[15px]">
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
       <p class="text-[16px] font-bold">아이디</P>
   </div>
   <div class="flex justify-center items-center px-5">
@@ -54,7 +54,7 @@ const loginHtml = (data) => {
     </div>  
   </div>
 
-  <div class="flex items-center mt-[30px] h-[40px] ml-[15px]">
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
       <p class="text-[16px] font-bold">이름</P>
   </div>
   <div class="flex justify-center items-center px-5">
@@ -63,7 +63,7 @@ const loginHtml = (data) => {
     </div>  
   </div>
 
-  <div class="flex items-center mt-[30px] h-[40px] ml-[15px]">
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
       <p class="text-[16px] font-bold">모바일</P>
   </div>
   <div class="flex justify-center items-center px-5">
@@ -72,14 +72,16 @@ const loginHtml = (data) => {
     </div>  
   </div>
 
-  <div class="flex justify-center items-center mt-[61px]">
+  <div>
+  <div class="flex justify-center items-center mt-[32px]">
       <Button
-          class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded">
+          class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[16px] rounded">
           프로필 수정하기
       </Button>
   </div>
   <div class="w-full flex justify-center mt-2">
-    <button class="logout-btn flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#FFAA2C] text-[#333333] text-[20px] rounded" onclick="logout()">로그아웃</button>
+    <button class="logout-btn flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#FFAA2C] text-[#333333] text-[16px] rounded" onclick="logout()">로그아웃</button>
+  </div>
   </div>
   `
   usersNav.innerHTML = html;
