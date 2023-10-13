@@ -1,7 +1,8 @@
 //api router.js
 
 import express from "express";
-import { getCourseList, qrCheck } from "../controller/courseController";
+
+import { getCourseList, getStampList, qrCheck } from "../controller/courseController";
 import { authMe, join, login } from "../controller/userController";
 import { handleKakaoLogin, isAuth } from "../middleware/auth";
 import passport from "passport";
@@ -14,6 +15,7 @@ const apiRouter = express.Router();
 apiRouter.get("/courses", getCourseList)
 apiRouter.post("/courses", isAuth, qrCheck);
 apiRouter.get("/home", getCourseList)
+apiRouter.post("/stamp", getStampList)
 
 // 회원가입
 apiRouter.post("/join", join);
