@@ -26,6 +26,10 @@ export const profileViewController = (req, res) => {
     res.render("profile");
 };
 
+export const profileViewEditController = (req, res) => {
+    res.render("profileEdit");
+};
+
 export const joinViewController = (req, res) => {
     res.render("join");
 };
