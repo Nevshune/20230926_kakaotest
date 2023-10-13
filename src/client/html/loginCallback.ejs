@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="ko">
+<%- include('common/header.ejs') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>카카오 지도</title>
-</head>
-
-<body>
   <script>
+    const msgAlert = (position, message, type) => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: position,
+        showConfirmButton: false,
+        timer: 2000,
+      })
+      Toast.fire({ title: message, icon: type })
+    }
+
     const getParameterByName = (name, url) => {
       if (!url) url = window.location.href;
       name = name.replace(/[\[\]]/g, '\\$&');
@@ -23,11 +25,13 @@
 
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
-      window.location.href = "/";
+      msgAlert("center", "로그인 성공", "success");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1400);
     } else {
       window.location.href = "/login?error=sns_login_fail";
     }
   </script>
-</body>
 
-</html>
+  <%- include('common/footer.ejs') %>
