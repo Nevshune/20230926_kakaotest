@@ -49,7 +49,7 @@ export const handleKakaoLogin = async (accessToken, refreshToken, profile, done)
   const profileImage = profile._json.properties.profile_image;
 
   const QUERY1 = `SELECT * FROM users WHERE user_email = ? AND user_provider = ?`;
-  const user = await db.execute(QUERY1, [id, provider]).then((result) => result[0][0]);
+  let user = await db.execute(QUERY1, [id, provider]).then((result) => result[0][0]);
   // console.log(user);
 
   // 첫 접속이면 회원가입 후 로그인
