@@ -68,7 +68,7 @@ const loginHtml = (data) => {
   </div>
   <div class="flex justify-center items-center px-5">
     <div class="w-full border-b border-[#FFAA2C] px-4">
-      ${data.user_mobile}
+      ${data.user_email}
     </div>  
   </div>
 
