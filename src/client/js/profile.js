@@ -27,50 +27,62 @@ const loginHtml = (data) => {
 
   let html = "";
   html += `
-  <div class="flex justify-center items-center text-[36px] text-[#FFAA2C] font-bold">
+  <div class="flex justify-center items-center text-[24px] text-[#FFAA2C] font-bold">
     My Page
   </div>
-  <div class="flex justify-center items-center mt-[7px]">`;
+  <div class="flex justify-center items-center mt-[7px]">
+    <div class="w-[80px] h-[80px] rounded-full overflow-hidden">`;
 
   // 프로필 이미지가 있는 경우를 분리
   if (data.user_image) {
-    html += `<img src="${data.user_image}" alt="유저 이미지" class="rounded-full bg-cover h-[90px] w-[90px]" />`
+    html += `<img src="${data.user_image}" alt="유저 이미지" class=" bg-cover h-[80px] w-[80px]" />`
   } else {
-    html += `<img src="../file/cat.png" alt="유저 이미지" class="rounded-full bg-cover h-[90px] w-[90px]" />`
+    html += `<img src="../file/cat.png" alt="유저 이미지" class="bg-cover h-[80px] w-[80px]" />`
   }
 
   html +=
     `
+    </div>
   </div>
-  <div class="flex items-center mt-[30px] h-[40px] ml-[15px]">
+  
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
       <p class="text-[16px] font-bold">아이디</P>
   </div>
-  <div class="flex justify-center items-center">
-      <input type="text" name="phone" placeholder="${data.user_name}"
-          class="w-[90%] text-[14px] border-0 border-b-[1px] border-[#FFAA2C] h-0" readonly />
-  </div>
-  <div class="flex items-center mt-[26px] h-[40px] ml-[15px]">
-      <p class="text-[16px] font-bold">E-mail</p>
+  <div class="flex justify-center items-center px-5">
+    <div class="w-full border-b border-[#FFAA2C] px-4">
+      ${data.user_provider==="kakao" ? "카카오 로그인 유저입니다." : data.user_email}
+    </div>  
   </div>
 
-  <div class="flex justify-center items-center">
-      <input type="email" name="name" placeholder="이메일을 입력해주세요."
-          class="w-[90%] text-[14px] border-0 border-b-[1px] border-[#FFAA2C] h-0" readonly />
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
+      <p class="text-[16px] font-bold">이름</P>
   </div>
-  <div class="flex items-center mt-[26px] h-[40px] ml-[15px]">
-      <p class="text-[16px] font-bold">연락처</P>
+  <div class="flex justify-center items-center px-5">
+    <div class="w-full border-b border-[#FFAA2C] px-4">
+      ${data.user_name}
+    </div>  
   </div>
-  <div class="flex justify-center items-center">
-      <input type="text" name="phone" placeholder="연락처를 입력해주세요."
-          class="w-[90%] text-[14px] border-0 border-b-[1px] border-[#FFAA2C] h-0" readonly />
+
+  <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
+      <p class="text-[16px] font-bold">모바일</P>
   </div>
-  <div class="flex justify-center items-center mt-[61px]">
+  <div class="flex justify-center items-center px-5">
+    <div class="w-full border-b border-[#FFAA2C] px-4">
+      ${data.user_email}
+    </div>  
+  </div>
+
+  <div>
+  <div class="flex justify-center items-center mt-[32px]">
       <Button
-          class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded">
+          class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[16px] rounded">
           프로필 수정하기
       </Button>
   </div>
-  <button class="logout-btn" onclick="logout()">로그아웃</button>
+  <div class="w-full flex justify-center mt-2">
+    <button class="logout-btn flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#FFAA2C] text-[#333333] text-[16px] rounded" onclick="logout()">로그아웃</button>
+  </div>
+  </div>
   `
   usersNav.innerHTML = html;
 }
