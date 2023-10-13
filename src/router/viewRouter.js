@@ -9,8 +9,8 @@ import {
     joinViewController,
     loginCallbackController,
     loginViewController,
-    myPageController,
     profileViewController,
+    profileViewEditController,
     qrViewController,
     stampController,
 } from "../controller/viewController";
@@ -26,6 +26,7 @@ viewRouter.get("/qr", qrViewController);
 viewRouter.get("/stamp", stampController);
 viewRouter.get("/howToDo", howToDoController);
 viewRouter.get("/profile", profileViewController);
+viewRouter.get("/profileEdit", profileViewEditController);
 viewRouter.get("/join", joinViewController);
 viewRouter.get("/login", loginViewController);
 viewRouter.get("/login/callback", loginCallbackController);

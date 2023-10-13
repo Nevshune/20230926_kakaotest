@@ -1,10 +1,15 @@
 <%- include('common/header.ejs') %>
 
-
-<div class="w-full min-h-screen
-            flex flex-col justify-center items-center
-             bg-[#F5F1E6] space-y-8">
-    <img src="../file/part1.png" alt="스탬프 팝업" class="w-[70%]" />
-    <img src="../file/part2.png" alt="스탬프 팝업" class="w-[85%]" />
+<div
+    class="w-full h-screen pt-[70px] pb-[100px] flex flex-col justify-around items-center bg-[#F5F1E6] space-y-8 px-4"
+>
+    <div class="w-full h-full flex flex-col justify-around">
+        <div class="flex justify-center h-[15%]">
+            <img src="../file/part1.png" alt="스탬프 팝업" class="" />
+        </div>
+        <div class="flex justify-center h-[70%] ">
+            <img src="../file/part2.png" alt="스탬프 팝업" class="" />
+        </div>
+    </div>
 </div>
-<%- include('common/footer.ejs') %> 
+<%- include('common/footer.ejs') %>
