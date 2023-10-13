@@ -21,12 +21,12 @@ export const join = async (request, response) => {
   // console.log(hashPassword);
 
   const QUERY2 = `INSERT INTO users
-      (user_email, user_password, user_name)
+      (user_email, user_password, user_name, user_mobile, createdDate, isDeleted)
     VALUES
-      (?, ?, ?)
+      (?, ?, ?, ?, NOW(), 0)
     `
 
-  db.execute(QUERY2, [joinData.userId, hashPassword, joinData.userName]);
+  db.execute(QUERY2, [joinData.userId, hashPassword, joinData.userName, joinData.userMobile]);
 
   response.status(201).json({ status: "success" });
 }
