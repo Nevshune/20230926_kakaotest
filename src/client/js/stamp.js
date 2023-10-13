@@ -1,5 +1,6 @@
 let stampListInfo = [];
 let stampCountInfo = [];
+let missionCompleteInfo = [];
 
 //스탬프 찍기 : 방문qr => 스탬프 1개 / 체험qr => 스탬프 2개 
 //스탬프 찍히는 총 개수는 6개 : 실제 스탬프 합산 개수 6개가 넘더라도 6개까지만 스탬프가 찍힘
@@ -8,22 +9,24 @@ const makeStampHtml = () => {
     const stamp_visited  = stampListInfo.filter((users_stamp) => users_stamp.stamp_level === 1)
     const stamp_experienced  = stampListInfo.filter((users_stamp) => users_stamp.stamp_level === 2)
     let stamp_completed = stamp_visited.length + stamp_experienced.length*2
-    if(stamp_completed >= 6 ){
-        stamp_completed = 6;
-    }
-    // console.log(stamp_completed)
+
     let html = "";
 
-        for(let i = 0; i < stamp_completed; i++){
-            html += `<div class="stamp_complete w-28 h-28 flex justify-center items-center">`
-            html += `<img src="../file/stamp/stamp_complete.png" alt="stamp_complete" class="w-full h-full">`
-            html += `</div>`
-        }
-        for(let i = 0; i < (6-stamp_completed); i++){
-            html += `<div class="stamp_preset w-28 h-28 flex justify-center items-center">`
-            html += `<img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">`
-            html += `</div>`
-        }   
+    if(stamp_completed >= 6 ){
+        stamp_completed = 6;
+        html += `<div class="absolute top-6"><img src="../file/stamp/mission_complete.png"></div>`
+    }
+    // console.log(stamp_completed)
+    for(let i = 0; i < stamp_completed; i++){
+        html += `<div class="stamp_complete w-[82px] h-[82px] flex justify-center items-center">
+                    <img src="../file/stamp/stamp_complete.png" alt="stamp_complete" class="w-full h-full">
+                </div>`
+    }
+    for(let i = 0; i < (6-stamp_completed); i++){
+        html += `<div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+                    <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+                </div>`
+    }
     stampBox.innerHTML = html;
     // console.log(stampBox)
 }
@@ -48,7 +51,7 @@ const missionComplete = () => {
         missionHtml += `쿠폰받기`
         missionHtml += `</div>`
 
-        completeHtml +=`<div class=""><img src="../file/stamp/mission_complete.png"></div>`
+        // completeHtml +=`<div class=""><img src="../file/stamp/mission_complete.png"></div>`
     }else{
         missionHtml += `<div id="stamp_count_box" class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#c8c8c8] text-[#333333] text-[16px] rounded tracking-wide">`
         missionHtml += `<i class="fas fa-stamp"></i>`
@@ -59,6 +62,8 @@ const missionComplete = () => {
     missionBox.innerHTML = missionHtml;
     couponBox.innerHTML = couponHtml;
 }
+
+
 
 
 //쿠폰보기
@@ -133,6 +138,30 @@ const getStampCountFetch = async () => {
       console.log("getStampCount api 연동 에러");
     }
   };
+
+  //백엔드 서버로 스탬프정보 요청
+const missionCompleteListFetch = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await fetch("/api/stamp/mission",{
+        method : 'POST',
+        headers : {
+            'Content-Type' : "application/json",
+            Accept : "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        }
+    });
+    const result = await response.json();
+    missionCompleteInfo = result;
+    console.log(missionCompleteInfo)
+
+    if (response.status === 200) {
+      console.log("getStampCount api 연동 성공");
+    //   console.log(stampListInfo)
+    } else {
+      console.log("getStampCount api 연동 에러");
+    }
+  };
   
   getStampListFetch();
   getStampCountFetch();
+//   missionCompleteListFetch();
