@@ -1,12 +1,23 @@
 <%- include('common/header.ejs') %>
 
-<div class="w-full min-h-screen pt-[20px] bg-white flex flex-col justify-center items-center gap-4">
+<div class="w-full h-screen flex flex-col justify-around  items-center pt-[100px] pb-[100px] ">
+
+    <div class="flex flex-col justify-center items-center ">
+        <img src="../file/stamp/titleLogo.png" alt="logo" class="h-[30px]">
+        <div class="text-[24px] font-bold">미션! 스탬프를 채워라!</div>
+        <div class="flex flex-col items-center justify-center">
+            <div>공방을 방문 및 체험하고 스탬프를 6개 채우면</div>
+            <div class="tracking-wide">15% 할인권 및 할로윈 캔들 응모권을 드려요</div>
+        </div>
+    </div>
+
     <!-- 스탬프 찍히는 공간 -->
     <div id="stamp_box" class="w-96 h-full flex flex-wrap justify-around items-center gap-4" ></div>
     <!-- 미션완료 표시 공간 -->
     <div class="w-full h-full flex flex-col justify-center items-center gap-1">
+        <div id="mission_complete" class="relative"></div>
         <div id="mission_box" class="w-full h-full flex justify-center items-center"></div>
-        <p class="text-xs text-gray-400">이벤트 기간 : 09.20 - 10.20</p>
+        <div class="text-[12px] text-[#848484]">이벤트 기간 : 09.20~10.20</div>
     </div>
 
     <!-- 쿠폰보기 표시 공간 -->

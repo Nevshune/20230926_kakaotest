@@ -15,7 +15,7 @@ const apiRouter = express.Router();
 apiRouter.get("/courses", getCourseList)
 apiRouter.post("/courses", isAuth, qrCheck);
 apiRouter.get("/home", getCourseList)
-apiRouter.post("/stamp", getStampList)
+apiRouter.post("/stamp", isAuth, getStampList)
 
 // 회원가입
 apiRouter.post("/join", join);
