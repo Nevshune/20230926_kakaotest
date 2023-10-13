@@ -1,63 +1,100 @@
 <%- include('common/header.ejs') %>
-    <div class="font-[Pretendard-Regular]">
-        <!--아이디, 비밀번호 입력양식 -->
-        <div class="flex justify-center items-center pt-[140px] text-[36px] text-[#FFAA2C] font-bold">
-            회원가입
-        </div>
 
-        <div class="flex justify-center items-center mt-[65px] h-[40px]">
+<div
+    class="font-[Pretendard-Regular] flex flex-col justify-around w-full h-screen pt-[100px] pb-[100px]"
+>
+    <!--아이디, 비밀번호 입력양식 -->
+    <div
+        class="flex justify-center items-center text-[36px] text-[#FFAA2C] font-bold"
+    >
+        회원가입
+    </div>
+
+    <div class="space-y-4">
+        <div class="flex justify-center items-center h-[40px]">
             <div class="w-[25%] text-[16px] font-bold">아이디</div>
-            <input type="text" name="name" placeholder="아이디를 입력해주세요." class="w-[70%] rounded-xl text-[14px]"
-                id="userId" />
+            <input
+                type="text"
+                name="name"
+                placeholder="아이디를 입력해주세요."
+                class="w-[70%] rounded-xl text-[14px]"
+                id="userId"
+            />
         </div>
 
-        <div class="flex justify-center items-center mt-[24px] h-[40px]">
+        <div class="flex justify-center items-center h-[40px]">
             <div class="w-[25%] text-[16px] font-bold">비밀번호</div>
-            <input type="password" name="name" placeholder="비밀번호를 입력해주세요."
-                class="flex justify-center w-[70%] rounded-xl text-[14px]" id="userPassword" />
+            <input
+                type="password"
+                name="name"
+                placeholder="비밀번호를 입력해주세요."
+                class="flex justify-center w-[70%] rounded-xl text-[14px]"
+                id="userPassword"
+            />
         </div>
 
-        <div class="flex justify-center items-center mt-[24px] h-[40px]">
+        <div class="flex justify-center items-center h-[40px]">
             <div class="w-[25%] text-[16px] font-bold">비밀번호 확인</div>
-            <input type="password" name="name" placeholder="위 비밀번호와 동일하게 입력해주세요." class="w-[70%] rounded-xl text-[14px]"
-                id="userPassword2" />
+            <input
+                type="password"
+                name="name"
+                placeholder="위 비밀번호와 동일하게 입력해주세요."
+                class="w-[70%] rounded-xl text-[14px]"
+                id="userPassword2"
+            />
         </div>
 
-        <div class="flex justify-center items-center mt-[24px] h-[40px]">
+        <div class="flex justify-center items-center h-[40px]">
             <div class="w-[25%] text-[16px] font-bold">이름</div>
-            <input type="email" name="name" placeholder="이름을 입력해주세요." class="w-[70%] rounded-xl text-[14px]"
-                id="userName" />
+            <input
+                type="email"
+                name="name"
+                placeholder="이름을 입력해주세요."
+                class="w-[70%] rounded-xl text-[14px]"
+                id="userName"
+            />
         </div>
 
-        <div class="flex justify-center items-center mt-[24px] h-[40px]">
+        <div class="flex justify-center items-center h-[40px]">
             <div class="w-[25%] text-[16px] font-bold">연락처</div>
-            <input type="email" name="name" placeholder="연락처 입력해주세요." class="w-[70%] rounded-xl text-[14px]"
-                id="userMobile" />
+            <input
+                type="email"
+                name="name"
+                placeholder="연락처 입력해주세요."
+                class="w-[70%] rounded-xl text-[14px]"
+                id="userMobile"
+            />
         </div>
 
         <!-- 개인정보처리방침 -->
-        <div class="flex justify-center items-center mt-[20px]">
-
-            <input id="agree" name="agree" type="checkbox"
-            
-                class="w-5 h-5 border border-black/30 focus:border-none ring-1 focus:ring-0 text-black/50" />
+        <div class="flex justify-center items-center">
+            <input
+                id="agree"
+                name="agree"
+                type="checkbox"
+                class="w-5 h-5 border border-black/30 focus:border-none ring-1 focus:ring-0 text-black/50"
+            />
             <label for="agree">
                 <div class="text-[14px] md:text-xl ml-[7px]">
-                    개인정보처리방침 동의<span class="text-black/50">(필수)</span>
+                    개인정보처리방침 동의<span class="text-black/50"
+                        >(필수)</span
+                    >
                 </div>
             </label>
         </div>
-
-        <!-- 로그인, 회원가입 버튼 -->
-        <div class="flex justify-center items-center mt-[34px]">
-            <Button
-                class="flex justify-center items-center w-[144px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded"
-                id="joinBtn" type="submit">
-                회원가입
-            </Button>
-        </div>
     </div>
+    <!-- 로그인, 회원가입 버튼 -->
+    <div class="flex justify-center items-center">
+        <Button
+            class="flex justify-center items-center w-[144px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[20px] rounded"
+            id="joinBtn"
+            type="submit"
+        >
+            회원가입
+        </Button>
+    </div>
+</div>
 
-    <script src="/js/join.js"></script>
+<script src="/js/join.js"></script>
 
-    <%- include('common/footer.ejs') %>
+<%- include('common/footer.ejs') %>
