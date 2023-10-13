@@ -14,7 +14,7 @@ const makeStampHtml = () => {
 
     if(stamp_completed >= 6 ){
         stamp_completed = 6;
-        html += `<div class="absolute top-6"><img src="../file/stamp/mission_complete2.png"></div>`
+        html += `<div class="absolute top-6"><img src="../file/stamp/misson_complete2.png"></div>`
     }
     // console.log(stamp_completed)
     for(let i = 0; i < stamp_completed; i++){
