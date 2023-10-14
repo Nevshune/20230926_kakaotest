@@ -12,12 +12,15 @@ let overlays = null;
 
 //지도 그리는 함수
 const drawMap = (latitude, lognitude) => {
-  const options = {
-    center: new kakao.maps.LatLng(latitude, lognitude),
-    level: 5,
-  };
-  map = new kakao.maps.Map(locationMap, options);
-  map.setZoomable(true);
+  return new Promise((resolve) => {
+    const options = {
+      center: new kakao.maps.LatLng(latitude, lognitude),
+      level: 5,
+    };
+    map = new kakao.maps.Map(locationMap, options);
+    map.setZoomable(true);
+    resolve();
+  });
 };
 
 //마커를 초기화하는 함수(유저 마커가 새로 생길 때 기존꺼를 지워버리기 위한 용도)
@@ -49,6 +52,7 @@ const panTo = (latitude, longitude) => {
 
 let clickMyPosition = () => {
   panTo(userLatitude, userLongitude);
+  clickShopId = 0; // 추가
 }
 
 //코스 마커 그리기
@@ -104,22 +108,27 @@ const allCourseMarker = () => {
 };
 
 //현재 위치 감시 함수 => 계속 내 위치 정보를 가져오는 허락이 있으면 위치정보가 갱신될 대마다 곗속 정보를 가지고 함수를 실행시켜줌
-const configurationLocationWatch = () => {
+const configurationLocationWatch = async () => {
   if (navigator.geolocation) {
-    navigator.geolocation.watchPosition((position) => {
+    navigator.geolocation.watchPosition(async (position) => {
       deleteMakers();
 
       userLatitude = position.coords.latitude;
       userLongitude = position.coords.longitude;
       if (!isMapDrawn) {
-        drawMap(userLatitude, userLongitude);
+        await drawMap(35.8654962151307, 128.5933983690471);
         allCourseMarker();
         isMapDrawn = true;
+
+        // 코스 정보와 함께 첫 번째 공방의 오버레이 생성
+        clickShopList(null, 1);
       }
+
       //유저 마커 그리기
       addUserMarker();
+
       if (clickShopId === 0) {
-        panTo(userLatitude, userLongitude);
+        panTo(35.8654962151307, 128.5933983690471);
       }
     });
   }
@@ -127,18 +136,17 @@ const configurationLocationWatch = () => {
 
 //커스텀 오버레이 complete
 const overlay = (matchedShop) => {
-  // console.log("오버레이 호출", matchedShop);
+  return new Promise((resolve) => {
+    // 기존의 overlays가 있다면 삭제
+    if (overlays) {
+      overlays.setMap(null);
+      overlays = null;
+    }
 
-  // 기존의 overlays가 있다면 삭제
-  if (overlays) {
-    overlays.setMap(null);
-    overlays = null;
-  }
-
-  overlays = new kakao.maps.CustomOverlay({
-    map: map,
-    clickable: true,
-    content: `
+    overlays = new kakao.maps.CustomOverlay({
+      map: map,
+      clickable: true,
+      content: `
         <div class="overlay relative drop-shadow-lg">
             <div class="w-[250px] h-full bg-white z-99">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
@@ -159,15 +167,18 @@ const overlay = (matchedShop) => {
             <div class="h-8 w-8 -z-10 bg-white transform translate-x-28 rotate-45 absolute -bottom-2"></div>
             </div>
         `,
-    position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
-    xAnchor: 0.5,
-    yAnchor: 1.5,
-    zIndex: 3
+      position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
+      xAnchor: 0.5,
+      yAnchor: 1.5,
+      zIndex: 3
+    });
+
+    resolve();
   });
 }
 
 //클릭이벤트
-const clickShopList = (e, atelierId) => {
+const clickShopList = async (e, atelierId) => {
 
   if (clickShopId !== atelierId) {
 
@@ -181,7 +192,7 @@ const clickShopList = (e, atelierId) => {
 
     panTo(shopLatitude, shopLongitude);
 
-    overlay(matchedShop);
+    await overlay(matchedShop);
 
     let overlay_item = document.querySelectorAll('.overlay');
 
