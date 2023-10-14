@@ -8,7 +8,7 @@ let userLongitude;
 let courseListInfo = [];
 let clickShopId = 0;
 
-let overlays = [];
+let overlays = null;
 
 //지도 그리는 함수
 const drawMap = (latitude, lognitude) => {
@@ -59,16 +59,16 @@ const addCourseMarker = (data) => {
   if (data.category == "도자기") {
     markerImage = "/file/marker/dojaki_marker.png";
   }
-  if (data.category == "페인팅") {
+  else if (data.category == "페인팅") {
     markerImage = "/file/marker/painting_marker.png";
   }
-  if (data.category == "쿠킹베이킹") {
+  else if (data.category == "쿠킹베이킹") {
     markerImage = "/file/marker/cooking_marker.png";
   }
-  if (data.category == "목공예라탄") {
+  else if (data.category == "목공예라탄") {
     markerImage = "/file/marker/wood_marker.png";
   }
-  if (data.category == "기타") {
+  else if (data.category == "기타") {
     markerImage = "/file/marker/etc_marker.png";
   }
   const image = new kakao.maps.MarkerImage(markerImage, markerSize);
@@ -83,6 +83,8 @@ const addCourseMarker = (data) => {
 
   kakao.maps.event.addListener(marker, 'click', function () {
     panTo(data.latitude, data.longitude);
+
+    // overlay 호출 시 matchedShop 정보 전달
     overlay(data);
 
     let overlay_item = document.querySelectorAll('.overlay');
@@ -123,14 +125,22 @@ const configurationLocationWatch = () => {
   }
 };
 
-//커스텀 오버레이
+//커스텀 오버레이 complete
 const overlay = (matchedShop) => {
-  let overlays = new kakao.maps.CustomOverlay({
+  // console.log("오버레이 호출", matchedShop);
+
+  // 기존의 overlays가 있다면 삭제
+  if (overlays) {
+    overlays.setMap(null);
+    overlays = null;
+  }
+
+  overlays = new kakao.maps.CustomOverlay({
     map: map,
     clickable: true,
     content: `
         <div class="overlay relative drop-shadow-lg">
-            <div class="w-[250px] h-full bg-white z-10">
+            <div class="w-[250px] h-full bg-white z-99">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
                     <div class="text-lg">${matchedShop.title}</div>
                 </div>
@@ -154,29 +164,27 @@ const overlay = (matchedShop) => {
     yAnchor: 1.5,
     zIndex: 3
   });
-  overlays.setMap(map);
 }
 
 //클릭이벤트
 const clickShopList = (e, atelierId) => {
+
   if (clickShopId !== atelierId) {
 
     let shopLatitude;
     let shopLongitude;
     let matchedShop;
 
-    if (atelierId === 0) {
-      shopLatitude = userLatitude;
-      shopLongitude = userLongitude;
-    } else {
-      matchedShop = courseListInfo.find((atelier_list) => atelier_list.atelier_id === atelierId);
-      shopLatitude = matchedShop.latitude;
-      shopLongitude = matchedShop.longitude;
-    }
+    matchedShop = courseListInfo.find((atelier_list) => atelier_list.atelier_id === atelierId);
+    shopLatitude = matchedShop.latitude;
+    shopLongitude = matchedShop.longitude;
+
     panTo(shopLatitude, shopLongitude);
+
     overlay(matchedShop);
 
     let overlay_item = document.querySelectorAll('.overlay');
+
     overlay_item.forEach(function (e) {
       e.parentElement.previousSibling.style.display = "none";
       e.parentElement.parentElement.style.border = "0px";
