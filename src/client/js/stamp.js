@@ -95,6 +95,16 @@ const getStampListFetch = async () => {
   const result = await response.json();
   stampListInfo = result;
 
+  if (response.status === 200) {
+    console.log("getStampList api 연동 성공");
+    //   console.log(stampListInfo)
+    makeStampHtml();
+    missionComplete();
+  } else {
+    console.log("getStampList api 연동 에러");
+  }
+};
+
 
 //   스탬프 미션 완료 => 미션완료 데이터 서버에 넣기
 const missionCompleteListFetch = async () => {
@@ -105,7 +115,18 @@ const missionCompleteListFetch = async () => {
       'Content-Type': "application/json",
       Accept: "application/json",
       Authorization: `Bearer ${accessToken}`,
-  };
-  
-  getStampListFetch();
+    }
+  });
+  const result = await response.json();
+  missionCompleteInfo = result;
+  console.log(missionCompleteInfo)
 
+  if (response.status === 200) {
+    console.log("getStampCount api 연동 성공");
+    clickGetCoupon();
+  } else {
+    console.log("getStampCount api 연동 에러");
+  }
+};
+
+getStampListFetch();
