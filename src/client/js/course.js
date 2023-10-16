@@ -116,20 +116,13 @@ const configurationLocationWatch = async () => {
       userLatitude = position.coords.latitude;
       userLongitude = position.coords.longitude;
       if (!isMapDrawn) {
-        await drawMap(35.8654962151307, 128.5933983690471);
+        await drawMap(35.86551347318857, 128.59342095643586);
         allCourseMarker();
         isMapDrawn = true;
-
-        // 코스 정보와 함께 첫 번째 공방의 오버레이 생성
-        clickShopList(null, 1);
       }
 
       //유저 마커 그리기
       addUserMarker();
-
-      if (clickShopId === 0) {
-        panTo(35.8654962151307, 128.5933983690471);
-      }
     });
   }
 };
