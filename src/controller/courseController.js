@@ -16,14 +16,14 @@ export const getCourseList = async (req, res) => {
 export const getStampList = async (req, res) => {
     const userId = req.user ? req.user.user_id : null;
     // console.log(userId);
-    //users_stamp에  user_id와 atelier_id, stamp_level(lever 1:방문/lever 2:체험) 가져오기
+    // users_stamp에  user_id와 atelier_id, stamp_level(lever 1:방문/lever 2:체험) 가져오기
     const QUERY = `
         SELECT * FROM users_stamp WHERE user_id = ?
     `
-    const stampLevel =await db.execute(QUERY, [userId]).then((result) => result[0]);
+    const stampLevel = await db.execute(QUERY, [userId]).then((result) => result[0]);
     res.json(stampLevel)
-    console.log("=========");
-    console.log(stampLevel);
+    // console.log("=========");
+    // console.log(stampLevel);
 }
 
 //스탬프 미션 완료 => 미션완료 데이터 서버에 넣기
@@ -34,7 +34,7 @@ export const missionCompleteList = async (req, res) => {
     const QUERY1 = `
         SELECT * FROM users_stamp WHERE user_id = ?
     `
-    const stampLevel =await db.execute(QUERY1, [userId]).then((result) => result[0]);
+    const stampLevel = await db.execute(QUERY1, [userId]).then((result) => result[0]);
     res.json(stampLevel)
     // console.log("=========");
     // console.log(stampLevel);
@@ -43,7 +43,7 @@ export const missionCompleteList = async (req, res) => {
     const stampLevelsSum = stampLevelsData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log(stampLevelsSum)
 
-    if(stampLevelsSum >=6 ){
+    if (stampLevelsSum >= 6) {
         // 1. 미션완료해서 쿠폰받기까지 진행한 유저가 있는지 확인
         const QUERY2 = `SELECT * FROM draw_lots_list WHERE user_id = ?`;
         const user = await db.execute(QUERY2, [userId]).then((result) => result[0][0]);
@@ -90,11 +90,15 @@ export const qrCheck = async (request, response) => {
     // console.log("stampLevel", stampLevel);
     // console.log("course", course);
 
-    // 검증코드 2: 해당유저 이 코스에 방문한적이 있는지
-    const QUERY3 = `SELECT * FROM users_stamp WHERE user_id = ? AND atelier_id = ?`
-    const userVisited = await db.execute(QUERY3, [userId, course.atelier_id]).then((result) => result[0][0]);
+    // 검증코드 2: 해당 유저가 이 코스에 방문이나 체험을 한 적이 있는지
+    const QUERY3 = `SELECT * FROM users_stamp WHERE user_id = ? AND atelier_id = ? AND stamp_level = ?`
+    const userVisited = await db.execute(QUERY3, [userId, course.atelier_id, stampLevel]).then((result) => result[0][0]);
 
-    if (userVisited) return response.status(400).json({ status: "이미 방문한 장소입니다." });
+    if (stampLevel === 1) {
+        if (userVisited) return response.status(400).json({ status: "이미 방문한 장소입니다." });
+    } else if (stampLevel === 2) {
+        if (userVisited) return response.status(400).json({ status: "이미 체험한 장소입니다." });
+    }
 
     console.log("성공");
 
@@ -107,7 +111,12 @@ export const qrCheck = async (request, response) => {
     // 방문완료 - 데이터베이스에 추가
     const QUERY4 = "INSERT INTO users_stamp (user_id, atelier_id, stamp_level) VALUES (?, ?, ?)";
     await db.execute(QUERY4, [userId, course.atelier_id, stampLevel]);
-    return response.status(201).json({ status: "success" });
+
+    if (stampLevel === 1) {
+        return response.status(201).json({ status: "방문 완료" });
+    } else if (stampLevel === 2) {
+        return response.status(201).json({ status: "체험 완료" });
+    }
 }
 
 const calculatorDistance = (currentLat, currentLon, targetLat, targetLon) => {
