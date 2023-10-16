@@ -9,7 +9,7 @@ export const getCourseList = async (req, res) => {
     const courseList = await db.execute(QUERY, [userId]).then((result) => result[0]);
     res.json(courseList);
 
-    console.log(courseList);
+    // console.log(courseList);
 }
 
 //공방 방문여부 => 스탬프 데이터 가져오기
@@ -18,44 +18,41 @@ export const getStampList = async (req, res) => {
     // console.log(userId);
     //users_stamp에  user_id와 atelier_id, stamp_level(lever 1:방문/lever 2:체험) 가져오기
     const QUERY = `
-        SELECT * FROM users_stamp WHERE user_id = ?
+        SELECT us.*, dll.drawLotsList_id FROM users_stamp us
+        LEFT JOIN draw_lots_list dll
+        ON us.user_id = dll.user_id
+        WHERE us.user_id = ?
     `
     const stampLevel =await db.execute(QUERY, [userId]).then((result) => result[0]);
     res.json(stampLevel)
-    console.log("=========");
-    console.log(stampLevel);
+    // console.log("=========");
+    // console.log(stampLevel);
 }
 
 //스탬프 미션 완료 => 미션완료 데이터 서버에 넣기
 export const missionCompleteList = async (req, res) => {
     const userId = req.user ? req.user.user_id : null;
-    // console.log(userId);
-    //users_stamp에  user_id와 atelier_id, stamp_level(lever 1:방문/lever 2:체험) 가져오기
-    const QUERY1 = `
-        SELECT * FROM users_stamp WHERE user_id = ?
-    `
-    const stampLevel =await db.execute(QUERY1, [userId]).then((result) => result[0]);
-    res.json(stampLevel)
-    // console.log("=========");
-    // console.log(stampLevel);
-
-    const stampLevelsData = stampLevel.map(users_stamp => users_stamp.stamp_level);
-    const stampLevelsSum = stampLevelsData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    console.log(stampLevelsSum)
-
-    if(stampLevelsSum >=6 ){
+    try {
         // 1. 미션완료해서 쿠폰받기까지 진행한 유저가 있는지 확인
-        const QUERY2 = `SELECT * FROM draw_lots_list WHERE user_id = ?`;
-        const user = await db.execute(QUERY2, [userId]).then((result) => result[0][0]);
+        const QUERY1 = `SELECT * FROM draw_lots_list WHERE user_id = ?`;
+        const [user] = await db.execute(QUERY1, [userId]);
+        console.log(user)
+        if (user.length > 0) {
+            // 이미 완료한 미션인 경우
+            return res.status(200).json({ status: "이미 완료된 미션입니다", user:user[0] });
+        } else {
+            // 미션완료 - 데이터베이스에 추가
+            const QUERY2 = "INSERT INTO draw_lots_list (user_id) VALUES (?)";
+            await db.execute(QUERY2, [userId]);
 
-        if (user) {
-            return res.status(409).json({ status: "이미 완료된 미션입니다" });
-        };
+            // 미션 완료 후 다시 해당 유저 정보 가져오기
+            const [user] = await db.execute(QUERY1, [userId]);
 
-        // 미션완료 - 데이터베이스에 추가
-        const QUERY3 = "INSERT INTO draw_lots_list (user_id) VALUES (?)";
-        await db.execute(QUERY3, [userId]);
-        return res.status(201).json({ status: "success" });
+            return res.status(200).json({ status: "success", user: user[0] });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({ status: "internal server error" });
     }
 }
 
