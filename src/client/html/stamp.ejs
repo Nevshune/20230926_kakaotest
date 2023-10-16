@@ -12,11 +12,35 @@
     </div>
 
     <!-- 스탬프 찍히는 공간 -->
-    <div id="stamp_box" class="grid grid-cols-3 gap-[21px] flex-wrap relative" ></div>
+    <div id="stamp_box" class="grid grid-cols-3 gap-[21px] flex-wrap relative" >
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+        <div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+            <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+        </div>
+    </div>
     <!-- 미션완료 표시 공간 -->
     <div class="w-full h-full flex flex-col justify-center items-center gap-1">
         <div id="mission_complete" class="relative"></div>
-        <div id="mission_box" class="w-full h-full flex justify-center items-center"></div>
+        <div id="mission_box" class="w-full h-full flex justify-center items-center">
+            <div id="stamp_count_box" class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#c8c8c8] text-[#333333] text-[16px] rounded tracking-wide">
+                <i class="fas fa-stamp"></i>
+                <div> 0 / 6</div>
+            </div>
+        </div>
         <div id="coupon_box" class="w-full h-full flex justify-center items-center"></div>
         <div class="text-[12px] text-[#848484]">이벤트 기간 : 09.20~10.20</div>
     </div>

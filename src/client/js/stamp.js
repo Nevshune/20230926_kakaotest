@@ -27,6 +27,13 @@ const makeStampHtml = () => {
                     <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
                 </div>`
     }
+    // if(!accessToken){
+    //     for(let i = 0; i < 6; i++){
+    //         html += `<div class="stamp_preset w-[82px] h-[82px] flex justify-center items-center">
+    //                     <img src="../file/stamp/stamp_preset.png" alt="stamp_preset" class="w-full h-full">
+    //                 </div>`
+    //     }
+    // }
     stampBox.innerHTML = html;
     // console.log(stampBox)
 }
@@ -133,6 +140,11 @@ const getStampListFetch = async () => {
   //백엔드 서버로 스탬프 갯수 정보 요청
 const getStampCountFetch = async () => {
     const accessToken = localStorage.getItem("accessToken");
+
+    // if(!accessToken){
+    //     const accessTokenData
+    // }
+    
     const response = await fetch("/api/stamp",{
         method : 'POST',
         headers : {
