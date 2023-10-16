@@ -8,16 +8,19 @@ let userLongitude;
 let courseListInfo = [];
 let clickShopId = 0;
 
-let overlays = [];
+let overlays = null;
 
 //지도 그리는 함수
 const drawMap = (latitude, lognitude) => {
-  const options = {
-    center: new kakao.maps.LatLng(latitude, lognitude),
-    level: 5,
-  };
-  map = new kakao.maps.Map(locationMap, options);
-  map.setZoomable(true);
+  return new Promise((resolve) => {
+    const options = {
+      center: new kakao.maps.LatLng(latitude, lognitude),
+      level: 5,
+    };
+    map = new kakao.maps.Map(locationMap, options);
+    map.setZoomable(true);
+    resolve();
+  });
 };
 
 //마커를 초기화하는 함수(유저 마커가 새로 생길 때 기존꺼를 지워버리기 위한 용도)
@@ -36,7 +39,7 @@ const addUserMarker = () => {
 
   let marker = new kakao.maps.Marker({
     map: map,
-    position: new kakao.maps.LatLng(35.86482240895294, 128.5933393643654),
+    position: new kakao.maps.LatLng(userLatitude, userLongitude),
     image: image,
   });
   markers.push(marker);
@@ -47,6 +50,11 @@ const panTo = (latitude, longitude) => {
   map.panTo(new kakao.maps.LatLng(latitude, longitude));
 };
 
+let clickMyPosition = () => {
+  panTo(userLatitude, userLongitude);
+  clickShopId = 0; // 추가
+}
+
 //코스 마커 그리기
 const addCourseMarker = (data) => {
   let markerImage = "";
@@ -55,16 +63,16 @@ const addCourseMarker = (data) => {
   if (data.category == "도자기") {
     markerImage = "/file/marker/dojaki_marker.png";
   }
-  if (data.category == "페인팅") {
+  else if (data.category == "페인팅") {
     markerImage = "/file/marker/painting_marker.png";
   }
-  if (data.category == "쿠킹베이킹") {
+  else if (data.category == "쿠킹베이킹") {
     markerImage = "/file/marker/cooking_marker.png";
   }
-  if (data.category == "목공예라탄") {
+  else if (data.category == "목공예라탄") {
     markerImage = "/file/marker/wood_marker.png";
   }
-  if (data.category == "기타") {
+  else if (data.category == "기타") {
     markerImage = "/file/marker/etc_marker.png";
   }
   const image = new kakao.maps.MarkerImage(markerImage, markerSize);
@@ -77,17 +85,19 @@ const addCourseMarker = (data) => {
     image: image,
   });
 
-  kakao.maps.event.addListener(marker, 'click', function() {
+  kakao.maps.event.addListener(marker, 'click', function () {
     panTo(data.latitude, data.longitude);
+
+    // overlay 호출 시 matchedShop 정보 전달
     overlay(data);
 
     let overlay_item = document.querySelectorAll('.overlay');
-      overlay_item.forEach(function (e) {
-        e.parentElement.previousSibling.style.display = "none";
-        e.parentElement.parentElement.style.border = "0px";
-        e.parentElement.parentElement.style.background = "unset";
-      });
-})
+    overlay_item.forEach(function (e) {
+      e.parentElement.previousSibling.style.display = "none";
+      e.parentElement.parentElement.style.border = "0px";
+      e.parentElement.parentElement.style.background = "unset";
+    });
+  })
 };
 
 // 모든 코스를 돌면서 마커를 그리기 위한 함수
@@ -98,35 +108,47 @@ const allCourseMarker = () => {
 };
 
 //현재 위치 감시 함수 => 계속 내 위치 정보를 가져오는 허락이 있으면 위치정보가 갱신될 대마다 곗속 정보를 가지고 함수를 실행시켜줌
-const configurationLocationWatch = () => {
+const configurationLocationWatch = async () => {
   if (navigator.geolocation) {
-    navigator.geolocation.watchPosition((position) => {
+    navigator.geolocation.watchPosition(async (position) => {
       deleteMakers();
 
       userLatitude = position.coords.latitude;
       userLongitude = position.coords.longitude;
       if (!isMapDrawn) {
-        drawMap(userLatitude, userLongitude);
+        await drawMap(35.8654962151307, 128.5933983690471);
         allCourseMarker();
         isMapDrawn = true;
+
+        // 코스 정보와 함께 첫 번째 공방의 오버레이 생성
+        clickShopList(null, 1);
       }
+
       //유저 마커 그리기
       addUserMarker();
+
       if (clickShopId === 0) {
-        panTo(userLatitude, userLongitude);
+        panTo(35.8654962151307, 128.5933983690471);
       }
     });
   }
 };
 
-//커스텀 오버레이
+//커스텀 오버레이 complete
 const overlay = (matchedShop) => {
-    let overlays = new kakao.maps.CustomOverlay({
-        map: map,
-        clickable: true,
-        content: `
+  return new Promise((resolve) => {
+    // 기존의 overlays가 있다면 삭제
+    if (overlays) {
+      overlays.setMap(null);
+      overlays = null;
+    }
+
+    overlays = new kakao.maps.CustomOverlay({
+      map: map,
+      clickable: true,
+      content: `
         <div class="overlay relative drop-shadow-lg">
-            <div class="w-[250px] h-full bg-white z-10">
+            <div class="w-[250px] h-full bg-white z-99">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
                     <div class="text-lg">${matchedShop.title}</div>
                 </div>
@@ -145,40 +167,41 @@ const overlay = (matchedShop) => {
             <div class="h-8 w-8 -z-10 bg-white transform translate-x-28 rotate-45 absolute -bottom-2"></div>
             </div>
         `,
-        position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
-        xAnchor: 0.5,
-        yAnchor: 1.5,
-        zIndex: 3
+      position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
+      xAnchor: 0.5,
+      yAnchor: 1.5,
+      zIndex: 3
     });
-    overlays.setMap(map);
+
+    resolve();
+  });
 }
 
 //클릭이벤트
-const clickShopList = (e, atelierId) => {
+const clickShopList = async (e, atelierId) => {
+
   if (clickShopId !== atelierId) {
 
     let shopLatitude;
     let shopLongitude;
     let matchedShop;
 
-    if (atelierId === 0) {
-      shopLatitude = userLatitude;
-      shopLongitude = userLongitude;
-    } else {
-      matchedShop = courseListInfo.find((atelier_list) => atelier_list.atelier_id === atelierId);
-      shopLatitude = matchedShop.latitude;
-      shopLongitude = matchedShop.longitude;
-    }
+    matchedShop = courseListInfo.find((atelier_list) => atelier_list.atelier_id === atelierId);
+    shopLatitude = matchedShop.latitude;
+    shopLongitude = matchedShop.longitude;
+
     panTo(shopLatitude, shopLongitude);
-    overlay(matchedShop);
+
+    await overlay(matchedShop);
 
     let overlay_item = document.querySelectorAll('.overlay');
-      overlay_item.forEach(function (e) {
-        e.parentElement.previousSibling.style.display = "none";
-        e.parentElement.parentElement.style.border = "0px";
-        e.parentElement.parentElement.style.background = "unset";
-      });
-    
+
+    overlay_item.forEach(function (e) {
+      e.parentElement.previousSibling.style.display = "none";
+      e.parentElement.parentElement.style.border = "0px";
+      e.parentElement.parentElement.style.background = "unset";
+    });
+
     clickShopId = atelierId;
   }
 };
@@ -196,7 +219,7 @@ const selectedCategory = () => {
 
     if (selectedId === "추천") {
       let recommendationCategory = courseListInfo.filter((atelier_list) => atelier_list.recommendation_status === 1);
-      
+
       for (let i = 0; i < recommendationCategory.length; i++) {
         //공방 카테고리별 색상설정
         let ringColor = ""; // 초기화
@@ -217,9 +240,9 @@ const selectedCategory = () => {
             ringColor = '#9984D3';
             break;
           // default:
-            // 기본값 설정 (원하는 값이 없는 경우)
-            // ringColor = "red";
-            // break;
+          // 기본값 설정 (원하는 값이 없는 경우)
+          // ringColor = "red";
+          // break;
         }
 
         html += `
@@ -260,9 +283,9 @@ const selectedCategory = () => {
             ringColor = '#9984D3';
             break;
           // default:
-            // 기본값 설정 (원하는 값이 없는 경우)
-            // ringColor = "red";
-            // break;
+          // 기본값 설정 (원하는 값이 없는 경우)
+          // ringColor = "red";
+          // break;
         }
 
         html += `
