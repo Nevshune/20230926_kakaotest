@@ -3,7 +3,7 @@
 import express from "express";
 
 
-import { getCourseList, getStampList, qrCheck } from "../controller/courseController";
+import { getCourseList, getStampList, missionCompleteList, qrCheck } from "../controller/courseController";
 import { authMe, join, login, profileEdit } from "../controller/userController";
 
 import { handleKakaoLogin, isAuth } from "../middleware/auth";
