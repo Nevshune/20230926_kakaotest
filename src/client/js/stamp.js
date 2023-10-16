@@ -84,24 +84,28 @@ const clickGetCoupon = () => {
 //백엔드 서버로 스탬프 리스트 정보 요청
 const getStampListFetch = async () => {
   const accessToken = localStorage.getItem("accessToken");
-  const response = await fetch("/api/stamp", {
-    method: 'POST',
-    headers: {
-      'Content-Type': "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    }
-  });
-  const result = await response.json();
-  stampListInfo = result;
 
-  if (response.status === 200) {
-    console.log("getStampList api 연동 성공");
-    //   console.log(stampListInfo)
-    makeStampHtml();
-    missionComplete();
-  } else {
-    console.log("getStampList api 연동 에러");
+  if (accessToken) {
+    const response = await fetch("/api/stamp", {
+      method: 'POST',
+      headers: {
+        'Content-Type': "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      }
+    });
+
+    const result = await response.json();
+    stampListInfo = result;
+
+    if (response.status === 200) {
+      console.log("getStampList api 연동 성공");
+      //   console.log(stampListInfo)
+      makeStampHtml();
+      missionComplete();
+    } else {
+      console.log("getStampList api 연동 에러");
+    }
   }
 };
 
