@@ -61,35 +61,80 @@ const loginHtml = (data) => {
       <p class="text-[16px] font-bold">이름</P>
   </div>
   <div class="flex justify-center items-center px-5">
-    <div class="w-full border-b border-[#FFAA2C] px-4">
-      ${data.user_name}
-    </div>  
+    <input type="text" id="userNameEdit" 
+    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${
+        data.user_name
+    }">      
+    </input>  
   </div>
 
   <div class="flex items-center mt-[20px] h-[40px] ml-[15px]">
       <p class="text-[16px] font-bold">모바일</P>
   </div>
   <div class="flex justify-center items-center px-5">
-    <div class="w-full border-b border-[#FFAA2C] px-4">
-      ${data.user_mobile}
-    </div>  
+    <input type="text" id="userMobileEdit"
+    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${
+        data.user_mobile
+    }">
+      
+    </input>  
   </div>
 
   <div>
-  <div class="flex justify-center items-center mt-[32px]">
-      <Button
-          class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[16px] rounded">
-            <a href="/profileEdit">
-              프로필 수정하기
-            </a>
-      </Button>
-  </div>
-  <div class="w-full flex justify-center mt-2">
-    <button class="logout-btn flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#FFAA2C] text-[#333333] text-[16px] rounded" onclick="logout()">로그아웃</button>
-  </div>
-  </div>
+        <div class="flex justify-center items-center mt-[32px]">
+            <Button
+                id="editBtn"
+                class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#292929] text-[#C8C8C8] text-[16px] rounded">
+                수정 완료
+            </Button>
+        </div>
+    </div>
+
   `;
     usersNav.innerHTML = html;
+
+    const editBtn = document.getElementById('editBtn');
+    const userNameEdit = document.getElementById('userNameEdit');
+    const userMobileEdit = document.getElementById('userMobileEdit');
+
+    editBtn.addEventListener('click', async () => {
+        const userName = userNameEdit.value;
+        const userMobile = userMobileEdit.value;
+        const userId = `${data.user_id}`
+        console.log(userName, userMobile, userId)
+
+        if (!userName || !userMobile) {
+            msgAlert('bottom', '모든 필드를 채워주세요.', 'error');
+            return;
+        }
+
+        // editFetch()라는 별도의 함수 없이 바로 fetch 요청을 보냅니다.
+        const response = await fetch('/api/profileEdit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify({
+                userName: userName,
+                userMobile: userMobile,
+                userId: userId,
+            }),
+        });
+        console.log(response);
+        const result = await response.json();
+        console.log(result);
+
+        if (response.status === 201) {
+            msgAlert('center', '회원정보 수정 완료', 'success');
+            setTimeout(() => {
+                window.location.href = '/profile';
+            }, 2000);
+        } else {
+            msgAlert('bottom', result.status, 'error');
+            return;
+        }
+    });
 };
 
 const checkUserInfo = async () => {

@@ -2,8 +2,10 @@
 
 import express from "express";
 
+
 import { getCourseList, getStampList, missionCompleteList, qrCheck } from "../controller/courseController";
-import { authMe, join, login } from "../controller/userController";
+import { authMe, join, login, profileEdit } from "../controller/userController";
+
 import { handleKakaoLogin, isAuth } from "../middleware/auth";
 import passport from "passport";
 
@@ -18,9 +20,17 @@ apiRouter.get("/home", getCourseList)
 apiRouter.post("/stamp", isAuth, getStampList)
 apiRouter.post("/stamp/mission", isAuth, missionCompleteList)
 
+// 헤더 로그인/프로필
+apiRouter.get("/home")
+
+
 // 회원가입
 apiRouter.post("/join", join);
 apiRouter.post("/login", login);
+
+//정보수정
+apiRouter.post("/profileEdit", profileEdit)
+
 
 // 카카오 로그인
 const clientId = process.env.CLIENT_ID;

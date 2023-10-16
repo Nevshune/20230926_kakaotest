@@ -1,71 +1,94 @@
 <%- include('common/header.ejs') %>
 
-<div class="container empty-background ">
-  <div class="w-[100vw] min-h-[calc(100vh - 250px)] pt-[60px] ">
-    <div id="location-map" class="w-full h-[calc(100vh-310px)] m-0"></div>
-    <div id="category" class="w-full flex justify-around mb-4 mt-2">
-      <form class="w-full h-[60px] flex justify-between items-center px-4 max-[345px]:px-0 font-[Pretendard-Regular] text-white">
-        <input type="radio" name="category" id="추천" class="peer/추천 hidden" checked />
-        <input type="radio" name="category" id="도자기" class="peer/도자기 hidden"/>
-        <input type="radio" name="category" id="페인팅" class="peer/페인팅 hidden"/>
-        <input type="radio" name="category" id="쿠킹베이킹" class="peer/쿠킹베이킹 hidden"/>
-        <input type="radio" name="category" id="목공예라탄" class="peer/목공예라탄 hidden"/>
-        <input type="radio" name="category" id="기타" class="peer/기타 hidden"/>
-        <label for="추천" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/추천:text-white peer-checked/추천:w-[60px] peer-checked/추천:h-[60px] peer-checked/추천:bg-black/5 peer-checked/추천:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_1.png')] bg-contain"></div>
-          <div class="z-20 text-white/90">추천</div>
-        </label>
-        <label for="도자기" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#F54747] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/도자기:text-white peer-checked/도자기:w-[60px] peer-checked/도자기:h-[60px] peer-checked/도자기:bg-black/5 peer-checked/도자기:ring-4 peer-checked/도자기:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_2.png')] bg-contain"></div>
-          <div class="z-20 text-white/90">도자기</div>
-        </label> 
-        <label for="페인팅" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#4AC2CA] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/페인팅:text-white peer-checked/페인팅:w-[60px] peer-checked/페인팅:h-[60px] peer-checked/페인팅:bg-black/5 peer-checked/페인팅:ring-4 peer-checked/페인팅:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_3.png')] bg-contain"></div>
-          <div class="z-20 text-white/90">페인팅</div>
-        </label> 
-        <label for="쿠킹베이킹" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#B5D35F] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/쿠킹베이킹:text-white peer-checked/쿠킹베이킹:w-[60px] peer-checked/쿠킹베이킹:h-[60px] peer-checked/쿠킹베이킹:bg-black/5 peer-checked/쿠킹베이킹:ring-4 peer-checked/쿠킹베이킹:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_4.png')] bg-contain"></div>
-          <div class="z-20 text-white/90 flex flex-col justify-center items-center">
+  <div class="container empty-background">
+    <div class="w-[100vw] min-h-[calc(100vh - 250px)] pt-[60px] ">
+      <div id="location-map" class="w-full h-[calc(100vh-310px)] m-0 relative">
+        <div
+          class="absolute z-[99] bottom-[30px] left-[10px] bg-black/50 p-1 rounded-lg text-white flex justify-around items-center gap-x-2">
+          <i class="fas fa-stamp"></i>
+          <div id="stamp_count_box"></div>
+        </div>
+        <div class="w-[40px] absolute bottom-[25px] right-[10px] z-[99]" onclick="clickMyPosition()">
+          <img src="../file/myPosition.png" alt="myPosition" class="z-99">
+        </div>
+      </div>
+      <div id="category" class="w-full flex justify-around mb-4 mt-2">
+        <form
+          class="w-full h-[60px] flex justify-between items-center px-4 max-[345px]:px-0 font-[Pretendard-Regular] text-white">
+          <input type="radio" name="category" id="추천" class="peer/추천 hidden" checked />
+          <input type="radio" name="category" id="도자기" class="peer/도자기 hidden" />
+          <input type="radio" name="category" id="페인팅" class="peer/페인팅 hidden" />
+          <input type="radio" name="category" id="쿠킹베이킹" class="peer/쿠킹베이킹 hidden" />
+          <input type="radio" name="category" id="목공예라탄" class="peer/목공예라탄 hidden" />
+          <input type="radio" name="category" id="기타" class="peer/기타 hidden" />
+          <label for="추천"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/추천:text-white peer-checked/추천:w-[60px] peer-checked/추천:h-[60px] peer-checked/추천:bg-black/5 peer-checked/추천:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div
+              class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_1.png')] bg-contain">
+            </div>
+            <div class="z-20 text-white/90">추천</div>
+          </label>
+          <label for="도자기"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#F54747] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/도자기:text-white peer-checked/도자기:w-[60px] peer-checked/도자기:h-[60px] peer-checked/도자기:bg-black/5 peer-checked/도자기:ring-4 peer-checked/도자기:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div
+              class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_2.png')] bg-contain">
+            </div>
+            <div class="z-20 text-white/90">도자기</div>
+          </label>
+          <label for="페인팅"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#4AC2CA] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/페인팅:text-white peer-checked/페인팅:w-[60px] peer-checked/페인팅:h-[60px] peer-checked/페인팅:bg-black/5 peer-checked/페인팅:ring-4 peer-checked/페인팅:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div
+              class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_3.png')] bg-contain">
+            </div>
+            <div class="z-20 text-white/90">페인팅</div>
+          </label>
+          <label for="쿠킹베이킹"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#B5D35F] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/쿠킹베이킹:text-white peer-checked/쿠킹베이킹:w-[60px] peer-checked/쿠킹베이킹:h-[60px] peer-checked/쿠킹베이킹:bg-black/5 peer-checked/쿠킹베이킹:ring-4 peer-checked/쿠킹베이킹:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div
+              class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_4.png')] bg-contain">
+            </div>
+            <div class="z-20 text-white/90 flex flex-col justify-center items-center">
               <div>쿠킹</div>
               <div>베이킹</div>
-          </div>
-        </label> 
-        <label for="목공예라탄" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#D2963C] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/목공예라탄:text-white peer-checked/목공예라탄:w-[60px] peer-checked/목공예라탄:h-[60px] peer-checked/목공예라탄:bg-black/5 peer-checked/목공예라탄:ring-4 peer-checked/목공예라탄:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_5.png')] bg-contain"></div>
-          <div class="z-20 text-white/90 flex flex-col justify-center items-center">
-                <div>라탄</div>
-                <div>목공예</div>
             </div>
-        </label> 
-        <label for="기타" class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/기타:text-white peer-checked/기타:w-[60px] peer-checked/기타:h-[60px] peer-checked/기타:bg-black/5 peer-checked/기타:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
-          <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[#9984D3] bg-contain"></div>
-          <div class="z-20 text-white/90 text-3xl">기타</div>
-        </label> 
-      </form>
+          </label>
+          <label for="목공예라탄"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center ring-2 ring-[#D2963C] ring-inset text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/목공예라탄:text-white peer-checked/목공예라탄:w-[60px] peer-checked/목공예라탄:h-[60px] peer-checked/목공예라탄:bg-black/5 peer-checked/목공예라탄:ring-4 peer-checked/목공예라탄:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div
+              class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[url('../../file/mainMenuBtn/mainMenu_5.png')] bg-contain">
+            </div>
+            <div class="z-20 text-white/90 flex flex-col justify-center items-center">
+              <div>라탄</div>
+              <div>목공예</div>
+            </div>
+          </label>
+          <label for="기타"
+            class="group w-[50px] h-[50px] rounded-full bg-black/30 bg-center text-white font-[Pretendard-Regular] relative flex justify-center items-center transition-all duration-75 peer-checked/기타:text-white peer-checked/기타:w-[60px] peer-checked/기타:h-[60px] peer-checked/기타:bg-black/5 peer-checked/기타:shadow-[0_2px_3px_0_rgba(0,0,0,0.2)]">
+            <div class="-z-10 absolute w-[100%] h-[100%] rounded-full bg-[#9984D3] bg-contain"></div>
+            <div class="z-20 text-white/90">기타</div>
+          </label>
+        </form>
+      </div>
+      <ul id="category_shops" class="w-full flex justify-around px-1 -z-99"></ul>
     </div>
-    <ul id="category_shops" class="w-full flex justify-around px-1 -z-99"></ul>
   </div>
-</div>
-<div class="absolute top-0 w-screen h-screen bg-[#292929] -z-20"></div>
+  <div class="absolute top-0 w-screen h-screen bg-[#292929] -z-20"></div>
 
-<div class="absolute z-[999] top-[15px] left-4 bg-black/50 p-1 rounded-lg text-white flex justify-around items-center gap-x-2">
-  <i class="fas fa-stamp"></i>
-  <div id="stamp_count_box"></div>
-</div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=process.env.KAKAO_MAP_KEY %>"></script>
-<script src="../js/course.js"></script>
-<script src="../js/stamp.js"></script>
 
-<script>
-  // 라디오 버튼 클릭 이벤트 처리
-  const radioButtons = document.querySelectorAll('input[type="radio"]');
-  radioButtons.forEach(function (radioButton) {
-    radioButton.addEventListener("click", function () {
-      selectedCategory(); // 라디오 버튼이 클릭되면 함수 호출
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=process.env.KAKAO_MAP_KEY %>"></script>
+  <script src="../js/course.js"></script>
+  <script src="../js/stamp.js"></script>
+
+  <script>
+    // 라디오 버튼 클릭 이벤트 처리
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(function (radioButton) {
+      radioButton.addEventListener("click", function () {
+        selectedCategory(); // 라디오 버튼이 클릭되면 함수 호출
+      });
     });
-  });
 
-</script>
+  </script>
 
-<%- include('common/footer.ejs') %>
+  <%- include('common/footer.ejs') %>
