@@ -23,7 +23,7 @@ const logout = () => {
 };
 
 const loginHtml = (data) => {
-    console.log(data);
+    // console.log(data);
 
     let html = '';
     html += `
@@ -49,11 +49,10 @@ const loginHtml = (data) => {
   </div>
   <div class="flex justify-center items-center px-5">
     <div class="w-full border-b border-[#FFAA2C] px-4">
-      ${
-          data.user_provider === 'kakao'
-              ? '카카오 로그인 유저입니다.'
-              : data.user_email
-      }
+      ${data.user_provider === 'kakao'
+            ? '카카오 로그인 유저입니다.'
+            : data.user_email
+        }
     </div>  
   </div>
 
@@ -62,9 +61,8 @@ const loginHtml = (data) => {
   </div>
   <div class="flex justify-center items-center px-5">
     <input type="text" id="userNameEdit" 
-    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${
-        data.user_name
-    }">      
+    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${data.user_name
+        }">      
     </input>  
   </div>
 
@@ -73,9 +71,8 @@ const loginHtml = (data) => {
   </div>
   <div class="flex justify-center items-center px-5">
     <input type="text" id="userMobileEdit"
-    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${
-        data.user_mobile
-    }">
+    class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${data.user_mobile
+        }">
       
     </input>  
   </div>
@@ -101,7 +98,7 @@ const loginHtml = (data) => {
         const userName = userNameEdit.value;
         const userMobile = userMobileEdit.value;
         const userId = `${data.user_id}`
-        console.log(userName, userMobile, userId)
+        // console.log(userName, userMobile, userId)
 
         if (!userName || !userMobile) {
             msgAlert('bottom', '모든 필드를 채워주세요.', 'error');
@@ -121,9 +118,9 @@ const loginHtml = (data) => {
                 userId: userId,
             }),
         });
-        console.log(response);
+        // console.log(response);
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         if (response.status === 201) {
             msgAlert('center', '회원정보 수정 완료', 'success');
