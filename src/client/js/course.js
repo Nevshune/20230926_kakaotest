@@ -136,10 +136,7 @@ const overlay = (matchedShop) => {
       overlays = null;
     }
 
-    overlays = new kakao.maps.CustomOverlay({
-      map: map,
-      clickable: true,
-      content: `
+    const content = `
         <div class="overlay relative drop-shadow-lg">
             <div class="w-[250px] h-full bg-white z-99">
                 <div class="w-full flex justify-between items-center p-[6px] bg-gray-300">
@@ -158,8 +155,11 @@ const overlay = (matchedShop) => {
                 </div>
             </div>
             <div class="h-8 w-8 -z-10 bg-white transform translate-x-28 rotate-45 absolute -bottom-2"></div>
-            </div>
-        `,
+        </form>`;
+
+    overlays = new kakao.maps.CustomOverlay({
+      content: content,
+      map: map,
       position: new kakao.maps.LatLng(matchedShop.latitude, matchedShop.longitude),
       xAnchor: 0.5,
       yAnchor: 1.5,
@@ -306,11 +306,12 @@ const selectedCategory = () => {
 //백엔드 서버로 코스정보 요청
 const getCourseListFetch = async () => {
   const response = await fetch("/api/courses");
+
   if (response.status === 200) {
     console.log("getCourseList api 연동 성공");
     const result = await response.json();
     courseListInfo = result;
-    configurationLocationWatch();
+    await configurationLocationWatch();
     selectedCategory();
   } else {
     console.log("getCourseList api 연동 에러");
