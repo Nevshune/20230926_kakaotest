@@ -66,7 +66,7 @@ const missionComplete = () => {
     }
   } else {
     missionHtml += `<div id="stamp_count_box" class="flex justify-center items-center w-[164px] h-[41px] border border-gray font-bold bg-[#c8c8c8] text-[#333333] text-[16px] rounded tracking-wide">`
-    missionHtml += `<i class="fas fa-stamp"></i>`
+    missionHtml += `<i class="fas fa-stamp"></i> &nbsp;`
     missionHtml += `<div>${stamp_completed} / 6</div>`
     missionHtml += `</div>`
   }
