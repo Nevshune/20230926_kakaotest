@@ -92,8 +92,8 @@ const startScane = () => {
     const tick = () => {
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
             // CSS
-            canvasElement.height = 600;
-            canvasElement.width = 600;
+            canvasElement.height = 800;
+            canvasElement.width = 800;
 
             canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
 

@@ -6,10 +6,13 @@
 import "dotenv/config";
 import "regenerator-runtime"
 import express from "express";
+import cors from 'cors';
 import viewRouter from "./router/viewRouter";
 import apiRouter from "./router/apiRouter";
 
 const app = express();
+
+app.use(cors());  // And add this line
 
 // node는 middleware 시스템으로 이루어져있음
 
