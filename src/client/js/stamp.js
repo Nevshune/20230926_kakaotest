@@ -35,7 +35,7 @@ const makeStampHtml = () => {
 const missionComplete = () => {
   const completeBox = document.getElementById("mission_complete");
   const missionBox = document.getElementById("mission_box");
-  const couponBox = document.getElementById("coupon_box");
+  const couponBox = document.getElementById("toggleButton");
 
   const userData = stampListInfo.map((draw_lots_list) => draw_lots_list.drawLotsList_id)
   // console.log(userData)
@@ -58,8 +58,7 @@ const missionComplete = () => {
     } else {
       //쿠폰보기
       missionBox.classList.add('hidden');
-      couponHtml += `<button 
-            data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" 
+      couponHtml += `<div 
             class="w-[160px] h-[40px] flex justify-center items-center bg-[#292929] text-white">`
       couponHtml += `쿠폰 보기`
       couponHtml += `</button>`
@@ -80,6 +79,28 @@ const clickGetCoupon = () => {
   location.reload(); return;
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButton = document.getElementById("toggleButton");
+  const modal = document.getElementById("modal");
+  const closeModal = document.getElementById("closeModal");
+
+  // 버튼을 클릭하면 모달을 엽니다.
+  toggleButton.addEventListener("click", function () {
+      modal.classList.remove("hidden");
+  });
+
+  // 모달 닫기 버튼을 클릭하면 모달을 닫습니다.
+  closeModal.addEventListener("click", function () {
+      modal.classList.add("hidden");
+  });
+
+  // 모달 외부를 클릭하면 모달을 닫습니다.
+  modal.addEventListener("click", function (event) {
+      if (event.target === modal) {
+          modal.classList.add("hidden");
+      }
+  });
+});
 
 //백엔드 서버로 스탬프 리스트 정보 요청
 const getStampListFetch = async () => {
