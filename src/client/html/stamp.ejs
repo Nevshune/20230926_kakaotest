@@ -41,19 +41,35 @@
                 <div> 0 / 6</div>
             </div>
         </div>
-        <div id="coupon_box" class="w-full  flex justify-center items-center"></div>
-        <div class="text-[12px] text-[#848484]">이벤트 기간 : 09.20~10.31</div>
+
+        <div id="coupon_box" class="w-full  flex justify-center items-center">
+            <button id="toggleButton"></button>
+        </div>
+        <div class="text-[12px] text-[#848484]">이벤트 기간 : 09.20~10.20</div>
+
     </div>
 </div> 
 
 <!-- Main modal -->
-<div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="w-full max-w-2xl max-h-full flex justify-center items-center">
+<!-- <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="w-full max-w-2xl max-h-full flex justify-center items-center"> -->
         <!-- Modal content -->
+        <!-- <div class="w-[360px] h-[140px] flex justify-center items-center"> -->
+            <!-- Modal body -->
+            <!-- <img src="../file/stamp/stamp_coupon.png" alt="coupon" class="w-full h-full">
+        </div>
+    </div>
+</div> -->
+
+
+<div id="modal" class="hidden fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-70">
+    <div class=" p-8 rounded-lg shadow-lg">
+        <!-- 모달 내용 -->
         <div class="w-[360px] h-[140px] flex justify-center items-center">
             <!-- Modal body -->
             <img src="../file/stamp/stamp_coupon.png" alt="coupon" class="w-full h-full">
         </div>
+        <button id="closeModal" class=" text-white p-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"></button>
     </div>
 </div>
 
