@@ -62,6 +62,7 @@ const loginHtml = (data) => {
   <div class="flex justify-center items-center px-5">
     <input type="text" id="userNameEdit" 
     class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${data.user_name
+        }" value="${data.user_name
         }">      
     </input>  
   </div>
@@ -72,6 +73,7 @@ const loginHtml = (data) => {
   <div class="flex justify-center items-center px-5">
     <input type="text" id="userMobileEdit"
     class="w-full ring-0 border-0 border-b-[1px] border-[#FFAA2C] px-4 focus:ring-0" placeholder="${data.user_mobile
+        }" value="${data.user_mobile
         }">
       
     </input>  

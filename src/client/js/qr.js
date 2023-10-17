@@ -128,7 +128,7 @@ const startScane = () => {
             video.play();
             requestAnimationFrame(tick);
         }).catch(function (err) {
-            console.err(err);
+            console.log(err);
         });
 }
 
